@@ -16,6 +16,7 @@
     <string name="history_clear_all">清除全部</string>
     <string name="action_cancel">取消</string>
     <string name="action_delete">删除</string>
+    <string name="action_clear">清除</string>
     <string name="action_copy">复制</string>
     <string name="action_new_chat">新对话</string>
     <string name="action_read_aloud">朗读</string>
@@ -60,8 +61,49 @@
     <string name="lang_czech">捷克语</string>
     <string name="lang_greek">希腊语</string>
     <string name="lang_hebrew">希伯来语</string>
+    <string name="settings_model">模型</string>
+    <string name="settings_model_loading">正在获取模型列表…</string>
+    <string name="settings_model_error">获取模型列表失败</string>
+    <string name="settings_model_retry">重试</string>
+    <string name="settings_model_manual_input">手动输入模型名</string>
+    <string name="settings_model_last_updated">模型列表更新于 %s</string>
+    <string name="settings_model_unsupported">此服务商暂不支持自动获取模型列表</string>
+    <string name="settings_model_no_api_key">请先输入 API Key</string>
+
     <string name="error_no_api_key">缺少 API 密钥！请在设置中配置。</string>
     <string name="error_network">网络错误，请重试。</string>
     <string name="bookmarked">已收藏</string>
     <string name="bookmark_removed">已取消收藏</string>
+
+    <!-- Endpoint Profile display names -->
+    <string name="endpoint_openai_direct">OpenAI（直连）</string>
+    <string name="endpoint_openai_azure">Azure OpenAI</string>
+    <string name="endpoint_anthropic_direct">Anthropic（直连）</string>
+    <string name="endpoint_anthropic_bedrock">AWS Bedrock</string>
+    <string name="endpoint_anthropic_vertex">GCP Vertex AI</string>
+    <string name="endpoint_gemini_studio">Google AI Studio</string>
+    <string name="endpoint_gemini_vertex">GCP Vertex AI</string>
+    <string name="endpoint_grok_direct">Grok（直连）</string>
+    <string name="endpoint_mimo_payg">按量付费</string>
+    <string name="endpoint_mimo_token">Token 计划</string>
+    <string name="endpoint_deepseek_direct">DeepSeek（直连）</string>
+    <string name="endpoint_qwen_compat">DashScope 兼容模式</string>
+    <string name="endpoint_qwen_native">DashScope 原生</string>
+    <string name="endpoint_ernie_v2">Qianfan v2</string>
+    <string name="endpoint_ernie_v1">Qianfan v1</string>
+    <string name="endpoint_hunyuan_independent">Hunyuan（独立）</string>
+    <string name="endpoint_hunyuan_tc3">Tencent Cloud TC3</string>
+    <string name="endpoint_zhipu_direct">Zhipu AI（直连）</string>
+    <string name="endpoint_kimi_cn">中国（moonshot.cn）</string>
+    <string name="endpoint_kimi_international">国际（moonshot.ai）</string>
+    <string name="endpoint_minimax_direct">MiniMax（直连）</string>
+    <string name="endpoint_config_resource">资源名称</string>
+    <string name="endpoint_config_deployment">部署名称</string>
+    <string name="endpoint_config_region">区域</string>
+    <string name="endpoint_config_project">项目 ID</string>
+    <string name="endpoint_config_aws_access_key_id">AWS 访问密钥 ID</string>
+    <string name="endpoint_config_secret_id">密钥 ID</string>
+    <string name="endpoint_selector_label">API 端点</string>
+    <string name="endpoint_config_label">端点配置</string>
+    <string name="endpoint_custom_url_hint">自定义基础 URL</string>
 </resources>

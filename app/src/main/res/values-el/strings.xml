@@ -16,6 +16,7 @@
     <string name="history_clear_all">Καθαρισμός όλων</string>
     <string name="action_cancel">Ακύρωση</string>
     <string name="action_delete">Διαγραφή</string>
+    <string name="action_clear">Καθαρισμός</string>
     <string name="action_copy">Αντιγραφή</string>
     <string name="action_read_aloud">Ανάγνωση φωναχτά</string>
     <string name="action_bookmark">Αποθήκευση</string>
@@ -59,6 +60,47 @@
     <string name="lang_czech">Τσεχικά</string>
     <string name="lang_greek">Ελληνικά</string>
     <string name="lang_hebrew">Εβραϊκά</string>
+    <string name="settings_model">Μοντέλο</string>
+    <string name="settings_model_loading">Λήψη λίστας μοντέλων…</string>
+    <string name="settings_model_error">Αποτυχία λήψης λίστας μοντέλων</string>
+    <string name="settings_model_retry">Δοκιμάστε ξανά</string>
+    <string name="settings_model_manual_input">Εισαγάγετε το όνομα μοντέλου χειροκίνητα</string>
+    <string name="settings_model_last_updated">Η λίστα μοντέλων ενημερώθηκε στις %s</string>
+    <string name="settings_model_unsupported">Αυτός ο πάροχος δεν υποστηρίζει αυτόματη λίστα μοντέλων</string>
+    <string name="settings_model_no_api_key">Εισαγάγετε πρώτα το κλειδί API</string>
+
     <string name="error_no_api_key">Λείπει το κλειδί API! Ορίστε το στις Ρυθμίσεις.</string>
     <string name="error_network">Σφάλμα δικτύου. Παρακαλώ δοκιμάστε ξανά.</string>
+
+    <!-- Endpoint Profile display names -->
+    <string name="endpoint_openai_direct">OpenAI (Άμεση)</string>
+    <string name="endpoint_openai_azure">Azure OpenAI</string>
+    <string name="endpoint_anthropic_direct">Anthropic (Άμεση)</string>
+    <string name="endpoint_anthropic_bedrock">AWS Bedrock</string>
+    <string name="endpoint_anthropic_vertex">GCP Vertex AI</string>
+    <string name="endpoint_gemini_studio">Google AI Studio</string>
+    <string name="endpoint_gemini_vertex">GCP Vertex AI</string>
+    <string name="endpoint_grok_direct">Grok (Άμεση)</string>
+    <string name="endpoint_mimo_payg">Χρέωση ανά χρήση</string>
+    <string name="endpoint_mimo_token">Πλάνο Token</string>
+    <string name="endpoint_deepseek_direct">DeepSeek (Άμεση)</string>
+    <string name="endpoint_qwen_compat">DashScope Συμβατό</string>
+    <string name="endpoint_qwen_native">DashScope Εγγενές</string>
+    <string name="endpoint_ernie_v2">Qianfan v2</string>
+    <string name="endpoint_ernie_v1">Qianfan v1</string>
+    <string name="endpoint_hunyuan_independent">Hunyuan (Ανεξάρτητη)</string>
+    <string name="endpoint_hunyuan_tc3">Tencent Cloud TC3</string>
+    <string name="endpoint_zhipu_direct">Zhipu AI (Άμεση)</string>
+    <string name="endpoint_kimi_cn">Κίνα (moonshot.cn)</string>
+    <string name="endpoint_kimi_international">Διεθνής (moonshot.ai)</string>
+    <string name="endpoint_minimax_direct">MiniMax (Άμεση)</string>
+    <string name="endpoint_config_resource">Όνομα πόρου</string>
+    <string name="endpoint_config_deployment">Όνομα ανάπτυξης</string>
+    <string name="endpoint_config_region">Περιοχή</string>
+    <string name="endpoint_config_project">Αναγνωριστικό έργου</string>
+    <string name="endpoint_config_aws_access_key_id">Αναγνωριστικό κλειδιού πρόσβασης AWS</string>
+    <string name="endpoint_config_secret_id">Αναγνωριστικό μυστικού</string>
+    <string name="endpoint_selector_label">Τελικό σημείο API</string>
+    <string name="endpoint_config_label">Ρύθμιση τελικού σημείου</string>
+    <string name="endpoint_custom_url_hint">Προσαρμοσμένο βασικό URL</string>
 </resources>

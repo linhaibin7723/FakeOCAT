@@ -16,6 +16,7 @@
     <string name="history_clear_all">Hapus Semua</string>
     <string name="action_cancel">Batal</string>
     <string name="action_delete">Hapus</string>
+    <string name="action_clear">Hapus</string>
     <string name="action_copy">Salin</string>
     <string name="action_read_aloud">Baca dengan Keras</string>
     <string name="action_bookmark">Simpan</string>
@@ -59,6 +60,47 @@
     <string name="lang_czech">Ceko</string>
     <string name="lang_greek">Yunani</string>
     <string name="lang_hebrew">Ibrani</string>
+    <string name="settings_model">Model</string>
+    <string name="settings_model_loading">Mengambil daftar model…</string>
+    <string name="settings_model_error">Gagal mengambil daftar model</string>
+    <string name="settings_model_retry">Coba lagi</string>
+    <string name="settings_model_manual_input">Masukkan nama model secara manual</string>
+    <string name="settings_model_last_updated">Daftar model diperbarui pada %s</string>
+    <string name="settings_model_unsupported">Penyedia ini tidak mendukung daftar model otomatis</string>
+    <string name="settings_model_no_api_key">Silakan masukkan API Key terlebih dahulu</string>
+
     <string name="error_no_api_key">Kunci API hilang! Atur di Pengaturan.</string>
     <string name="error_network">Kesalahan jaringan. Silakan coba lagi.</string>
+
+    <!-- Endpoint Profile display names -->
+    <string name="endpoint_openai_direct">OpenAI (Langsung)</string>
+    <string name="endpoint_openai_azure">Azure OpenAI</string>
+    <string name="endpoint_anthropic_direct">Anthropic (Langsung)</string>
+    <string name="endpoint_anthropic_bedrock">AWS Bedrock</string>
+    <string name="endpoint_anthropic_vertex">GCP Vertex AI</string>
+    <string name="endpoint_gemini_studio">Google AI Studio</string>
+    <string name="endpoint_gemini_vertex">GCP Vertex AI</string>
+    <string name="endpoint_grok_direct">Grok (Langsung)</string>
+    <string name="endpoint_mimo_payg">Bayar sesuai penggunaan</string>
+    <string name="endpoint_mimo_token">Paket Token</string>
+    <string name="endpoint_deepseek_direct">DeepSeek (Langsung)</string>
+    <string name="endpoint_qwen_compat">DashScope Kompatibel</string>
+    <string name="endpoint_qwen_native">DashScope Asli</string>
+    <string name="endpoint_ernie_v2">Qianfan v2</string>
+    <string name="endpoint_ernie_v1">Qianfan v1</string>
+    <string name="endpoint_hunyuan_independent">Hunyuan (Independen)</string>
+    <string name="endpoint_hunyuan_tc3">Tencent Cloud TC3</string>
+    <string name="endpoint_zhipu_direct">Zhipu AI (Langsung)</string>
+    <string name="endpoint_kimi_cn">Tiongkok (moonshot.cn)</string>
+    <string name="endpoint_kimi_international">Internasional (moonshot.ai)</string>
+    <string name="endpoint_minimax_direct">MiniMax (Langsung)</string>
+    <string name="endpoint_config_resource">Nama Resource</string>
+    <string name="endpoint_config_deployment">Nama Deployment</string>
+    <string name="endpoint_config_region">Wilayah</string>
+    <string name="endpoint_config_project">ID Proyek</string>
+    <string name="endpoint_config_aws_access_key_id">ID Kunci Akses AWS</string>
+    <string name="endpoint_config_secret_id">ID Rahasia</string>
+    <string name="endpoint_selector_label">Endpoint API</string>
+    <string name="endpoint_config_label">Konfigurasi Endpoint</string>
+    <string name="endpoint_custom_url_hint">URL Dasar Kustom</string>
 </resources>

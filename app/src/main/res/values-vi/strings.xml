@@ -16,6 +16,7 @@
     <string name="history_clear_all">Xóa tất cả</string>
     <string name="action_cancel">Hủy</string>
     <string name="action_delete">Xóa</string>
+    <string name="action_clear">Xóa</string>
     <string name="action_copy">Sao chép</string>
     <string name="action_read_aloud">Đọc to</string>
     <string name="action_bookmark">Lưu</string>
@@ -59,6 +60,47 @@
     <string name="lang_czech">Tiếng Séc</string>
     <string name="lang_greek">Tiếng Hy Lạp</string>
     <string name="lang_hebrew">Tiếng Do Thái</string>
+    <string name="settings_model">Mô hình</string>
+    <string name="settings_model_loading">Đang tải danh sách mô hình…</string>
+    <string name="settings_model_error">Không thể tải danh sách mô hình</string>
+    <string name="settings_model_retry">Thử lại</string>
+    <string name="settings_model_manual_input">Nhập tên mô hình thủ công</string>
+    <string name="settings_model_last_updated">Danh sách mô hình cập nhật lúc %s</string>
+    <string name="settings_model_unsupported">Nhà cung cấp này không hỗ trợ tự động lấy danh sách mô hình</string>
+    <string name="settings_model_no_api_key">Vui lòng nhập API Key trước</string>
+
     <string name="error_no_api_key">Thiếu khóa API! Hãy thiết lập trong Cài đặt.</string>
     <string name="error_network">Lỗi mạng. Vui lòng thử lại.</string>
+
+    <!-- Endpoint Profile display names -->
+    <string name="endpoint_openai_direct">OpenAI (Trực tiếp)</string>
+    <string name="endpoint_openai_azure">Azure OpenAI</string>
+    <string name="endpoint_anthropic_direct">Anthropic (Trực tiếp)</string>
+    <string name="endpoint_anthropic_bedrock">AWS Bedrock</string>
+    <string name="endpoint_anthropic_vertex">GCP Vertex AI</string>
+    <string name="endpoint_gemini_studio">Google AI Studio</string>
+    <string name="endpoint_gemini_vertex">GCP Vertex AI</string>
+    <string name="endpoint_grok_direct">Grok (Trực tiếp)</string>
+    <string name="endpoint_mimo_payg">Trả theo sử dụng</string>
+    <string name="endpoint_mimo_token">Gói Token</string>
+    <string name="endpoint_deepseek_direct">DeepSeek (Trực tiếp)</string>
+    <string name="endpoint_qwen_compat">DashScope Tương thích</string>
+    <string name="endpoint_qwen_native">DashScope Gốc</string>
+    <string name="endpoint_ernie_v2">Qianfan v2</string>
+    <string name="endpoint_ernie_v1">Qianfan v1</string>
+    <string name="endpoint_hunyuan_independent">Hunyuan (Độc lập)</string>
+    <string name="endpoint_hunyuan_tc3">Tencent Cloud TC3</string>
+    <string name="endpoint_zhipu_direct">Zhipu AI (Trực tiếp)</string>
+    <string name="endpoint_kimi_cn">Trung Quốc (moonshot.cn)</string>
+    <string name="endpoint_kimi_international">Quốc tế (moonshot.ai)</string>
+    <string name="endpoint_minimax_direct">MiniMax (Trực tiếp)</string>
+    <string name="endpoint_config_resource">Tên tài nguyên</string>
+    <string name="endpoint_config_deployment">Tên triển khai</string>
+    <string name="endpoint_config_region">Khu vực</string>
+    <string name="endpoint_config_project">ID dự án</string>
+    <string name="endpoint_config_aws_access_key_id">ID khóa truy cập AWS</string>
+    <string name="endpoint_config_secret_id">ID bí mật</string>
+    <string name="endpoint_selector_label">Điểm cuối API</string>
+    <string name="endpoint_config_label">Cấu hình điểm cuối</string>
+    <string name="endpoint_custom_url_hint">URL cơ sở tùy chỉnh</string>
 </resources>

@@ -10,6 +10,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.example.fakeocat.network.AiProviderCatalog
+import com.example.fakeocat.network.EndpointProfile
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -44,6 +45,17 @@ class PreferencesManager(
         val APP_LANGUAGE = stringPreferencesKey("app_language")
         val NATIVE_LANGUAGE = stringPreferencesKey("native_language")
         val TARGET_LANGUAGE = stringPreferencesKey("target_language")
+
+        fun selectedModelKey(provider: String) =
+            stringPreferencesKey("selected_model_$provider")
+
+        /** 端点选择：selected_endpoint_{provider} → profile ID */
+        fun selectedEndpointKey(provider: String) =
+            stringPreferencesKey("selected_endpoint_$provider")
+
+        /** 端点额外配置：endpoint_config_{provider}_{profileId}_{fieldKey} */
+        fun endpointConfigKey(provider: String, profileId: String, fieldKey: String) =
+            stringPreferencesKey("endpoint_config_${provider}_${profileId}_$fieldKey")
     }
 
     val selectedProviderFlow: Flow<String> = context.dataStore.data.map { 
@@ -112,6 +124,141 @@ class PreferencesManager(
 
     suspend fun setTargetLanguage(lang: String) {
         context.dataStore.edit { it[TARGET_LANGUAGE] = lang }
+    }
+
+    // ══════════════════════════════════════════════
+    // 模型选择持久化
+    // ══════════════════════════════════════════════
+
+    /** 获取用户为指定 Provider 手动选择的模型名（空字符串表示未设置） */
+    fun selectedModelFlowFor(provider: String): Flow<String> {
+        return context.dataStore.data.map { prefs ->
+            prefs[selectedModelKey(provider)] ?: ""
+        }
+    }
+
+    /** 保存用户选择的模型名 */
+    suspend fun setSelectedModelFor(provider: String, model: String) {
+        Log.d(TAG, "Setting selected model for $provider: $model")
+        context.dataStore.edit { it[selectedModelKey(provider)] = model }
+    }
+
+    /**
+     * 获取实际使用的模型名。
+     * 优先使用用户为该 Provider 手动选择的模型；
+     * 其次使用 AiProviderInfo 中的硬编码默认模型。
+     */
+    suspend fun resolveModel(providerId: String): String {
+        val saved = context.dataStore.data.first()[selectedModelKey(providerId)] ?: ""
+        if (saved.isNotBlank()) {
+            Log.d(TAG, "Resolved model for $providerId: $saved (user selected)")
+            return saved
+        }
+        val default = AiProviderCatalog.getProvider(providerId)?.model ?: "gpt-5.4-mini"
+        Log.d(TAG, "Resolved model for $providerId: $default (default)")
+        return default
+    }
+
+    // ══════════════════════════════════════════════
+    // 端点选择持久化
+    // ══════════════════════════════════════════════
+
+    /** 获取用户为指定 Provider 选择的端点 Profile ID（空字符串表示使用默认） */
+    fun selectedEndpointFlowFor(provider: String): Flow<String> {
+        return context.dataStore.data.map { prefs ->
+            prefs[selectedEndpointKey(provider)] ?: ""
+        }
+    }
+
+    /** 保存用户选择的端点 Profile ID */
+    suspend fun setSelectedEndpointFor(provider: String, profileId: String) {
+        Log.d(TAG, "Setting selected endpoint for $provider: $profileId")
+        context.dataStore.edit { it[selectedEndpointKey(provider)] = profileId }
+    }
+
+    /** 获取用户为指定 Provider 选择的端点 Profile ID（非 Flow 版本） */
+    suspend fun getSelectedEndpoint(providerId: String): String {
+        return context.dataStore.data.first()[selectedEndpointKey(providerId)] ?: ""
+    }
+
+    // ══════════════════════════════════════════════
+    // 端点额外配置持久化
+    // ══════════════════════════════════════════════
+
+    /** 获取端点额外配置值（Flow 版本，供 UI 订阅） */
+    fun endpointConfigFlowFor(providerId: String, profileId: String, fieldKey: String): Flow<String> {
+        return context.dataStore.data.map { prefs ->
+            prefs[endpointConfigKey(providerId, profileId, fieldKey)] ?: ""
+        }
+    }
+
+    /** 获取端点额外配置值（suspend 版本） */
+    suspend fun getEndpointConfig(
+        provider: String, profileId: String, fieldKey: String
+    ): String {
+        val field = AiProviderCatalog.getEndpoint(provider, profileId)
+            ?.extraConfigFields?.firstOrNull { it.key == fieldKey }
+
+        return if (field?.isSecret == true) {
+            // 敏感信息从 EncryptedSharedPreferences 读取
+            encryptedPrefs.getString(
+                "endpoint_config_${provider}_${profileId}_$fieldKey", ""
+            ) ?: ""
+        } else {
+            // 非敏感信息从 DataStore 读取
+            context.dataStore.data.first()[
+                endpointConfigKey(provider, profileId, fieldKey)
+            ] ?: ""
+        }
+    }
+
+    /** 获取端点所有额外配置值的 Map */
+    suspend fun getEndpointConfigMap(
+        provider: String, profileId: String
+    ): Map<String, String> {
+        val profile = AiProviderCatalog.getEndpoint(provider, profileId)
+            ?: return emptyMap()
+        val result = mutableMapOf<String, String>()
+        for (field in profile.extraConfigFields) {
+            val value = getEndpointConfig(provider, profileId, field.key)
+            if (value.isNotBlank()) {
+                result[field.key] = value
+            }
+        }
+        return result
+    }
+
+    /** 保存端点额外配置值 */
+    suspend fun setEndpointConfig(
+        provider: String, profileId: String, fieldKey: String, value: String,
+        isSecret: Boolean = false
+    ) {
+        Log.d(TAG, "Setting endpoint config for $provider/$profileId: $fieldKey")
+        if (isSecret) {
+            encryptedPrefs.edit().putString(
+                "endpoint_config_${provider}_${profileId}_$fieldKey", value
+            ).apply()
+        } else {
+            context.dataStore.edit {
+                it[endpointConfigKey(provider, profileId, fieldKey)] = value
+            }
+        }
+    }
+
+    /**
+     * 解析当前有效的 EndpointProfile。
+     * 优先使用用户选择的 profile ID；其次使用 Provider 的默认 profile。
+     */
+    suspend fun resolveEndpointProfile(providerId: String): EndpointProfile {
+        val savedProfileId = context.dataStore.data.first()[
+            selectedEndpointKey(providerId)
+        ] ?: ""
+        return if (savedProfileId.isNotBlank()) {
+            AiProviderCatalog.getEndpoint(providerId, savedProfileId)
+                ?: AiProviderCatalog.getProvider(providerId)!!.defaultProfile
+        } else {
+            AiProviderCatalog.getProvider(providerId)!!.defaultProfile
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.fakeocat.network
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -14,21 +15,21 @@ class ProviderStreamParsersTest {
     }
 
     @Test
-    fun openai_parser_reads_reasoning_content() {
+    fun openai_parser_ignores_reasoning_content() {
         val data = """{"choices":[{"delta":{"reasoning_content":"思考过程..."}}]}"""
         val chunk = ProviderStreamParsers.openAiCompatible.parse(null, data)
-        assertEquals(ParsedSseChunk.Text("思考过程..."), chunk)
+        assertTrue(chunk is ParsedSseChunk.Ignore)
     }
 
     @Test
-    fun openai_parser_reads_reasoning_field() {
+    fun openai_parser_ignores_reasoning_field() {
         val data = """{"choices":[{"delta":{"reasoning":"thinking..."}}]}"""
         val chunk = ProviderStreamParsers.openAiCompatible.parse(null, data)
-        assertEquals(ParsedSseChunk.Text("thinking..."), chunk)
+        assertTrue(chunk is ParsedSseChunk.Ignore)
     }
 
     @Test
-    fun openai_parser_prefers_content_over_reasoning() {
+    fun openai_parser_extracts_content_and_ignores_reasoning() {
         val data = """{"choices":[{"delta":{"content":"main","reasoning_content":"思考"}}]}"""
         val chunk = ProviderStreamParsers.openAiCompatible.parse(null, data)
         assertEquals(ParsedSseChunk.Text("main"), chunk)
@@ -137,6 +138,17 @@ class ProviderStreamParsersTest {
     }
 
     @Test
+    fun gemini_parser_detects_error_response() {
+        val data = """{"error":{"code":400,"message":"API key not valid","status":"INVALID_ARGUMENT"}}"""
+        val chunk = ProviderStreamParsers.gemini.parse(null, data)
+        assertTrue("应检测到错误响应", chunk is ParsedSseChunk.Text)
+        val text = (chunk as ParsedSseChunk.Text).value
+        assertTrue("应包含错误码", text.contains("400"))
+        assertTrue("应包含错误消息", text.contains("API key not valid"))
+        assertTrue("应包含状态", text.contains("INVALID_ARGUMENT"))
+    }
+
+    @Test
     fun provider_specific_fallbacks_cover_non_standard_fields() {
         val ernie = ProviderStreamParsers.ernie.parse(null, """{"result":"ernie text"}""")
         assertEquals(ParsedSseChunk.Text("ernie text"), ernie)
@@ -162,6 +174,94 @@ class ProviderStreamParsersTest {
 
         val fallback = ProviderStreamParsers.forProvider("unknown").parse(null, """{"choices":[{"delta":{"content":"ok2"}}]}""")
         assertEquals(ParsedSseChunk.Text("ok2"), fallback)
+    }
+
+    // ══════════════════════════════════════════════
+    // forProtocol 路由测试
+    // ══════════════════════════════════════════════
+
+    @Test
+    fun forProtocol_OpenAICompatible_routes_to_openai_parser() {
+        val chunk = ProviderStreamParsers.forProtocol(ApiProtocol.OpenAICompatible)
+            .parse(null, """{"choices":[{"delta":{"content":"hi"}}]}""")
+        assertEquals(ParsedSseChunk.Text("hi"), chunk)
+    }
+
+    @Test
+    fun forProtocol_AzureOpenAI_routes_to_openai_parser() {
+        val chunk = ProviderStreamParsers.forProtocol(ApiProtocol.AzureOpenAI)
+            .parse(null, """{"choices":[{"delta":{"content":"azure hi"}}]}""")
+        assertEquals(ParsedSseChunk.Text("azure hi"), chunk)
+    }
+
+    @Test
+    fun forProtocol_AnthropicMessages_routes_to_anthropic_parser() {
+        val chunk = ProviderStreamParsers.forProtocol(ApiProtocol.AnthropicMessages)
+            .parse("content_block_delta", """{"type":"content_block_delta","delta":{"text":"hi"}}""")
+        assertEquals(ParsedSseChunk.Text("hi"), chunk)
+    }
+
+    @Test
+    fun forProtocol_BedrockAnthropic_routes_to_anthropic_parser() {
+        val chunk = ProviderStreamParsers.forProtocol(ApiProtocol.BedrockAnthropic)
+            .parse("content_block_delta", """{"type":"content_block_delta","delta":{"text":"bedrock"}}""")
+        assertEquals(ParsedSseChunk.Text("bedrock"), chunk)
+    }
+
+    @Test
+    fun forProtocol_VertexAnthropic_routes_to_anthropic_parser() {
+        val chunk = ProviderStreamParsers.forProtocol(ApiProtocol.VertexAnthropic)
+            .parse("message_stop", "{}")
+        assertTrue(chunk is ParsedSseChunk.Done)
+    }
+
+    @Test
+    fun forProtocol_GeminiNative_routes_to_gemini_parser() {
+        val data = """{"candidates":[{"content":{"parts":[{"text":"gemini"}]}}]}"""
+        val chunk = ProviderStreamParsers.forProtocol(ApiProtocol.GeminiNative)
+            .parse(null, data)
+        assertEquals(ParsedSseChunk.Text("gemini"), chunk)
+    }
+
+    @Test
+    fun forProtocol_VertexGemini_routes_to_gemini_parser() {
+        val data = """{"candidates":[{"content":{"parts":[{"text":"vertex"}]}}]}"""
+        val chunk = ProviderStreamParsers.forProtocol(ApiProtocol.VertexGemini)
+            .parse(null, data)
+        assertEquals(ParsedSseChunk.Text("vertex"), chunk)
+    }
+
+    @Test
+    fun forProtocol_DashScopeNative_routes_to_dashscope_parser() {
+        val data = """{"output":{"choices":[{"message":{"content":"dashscope"}}]}}"""
+        val chunk = ProviderStreamParsers.forProtocol(ApiProtocol.DashScopeNative)
+            .parse(null, data)
+        assertEquals(ParsedSseChunk.Text("dashscope"), chunk)
+    }
+
+    @Test
+    fun forProtocol_QianfanV1RPC_routes_to_qianfan_parser() {
+        val data = """{"result":"qianfan text","is_end":false}"""
+        val chunk = ProviderStreamParsers.forProtocol(ApiProtocol.QianfanV1RPC)
+            .parse(null, data)
+        assertEquals(ParsedSseChunk.Text("qianfan text"), chunk)
+    }
+
+    @Test
+    fun forProtocol_TencentCloudTC3_routes_to_tc3_parser() {
+        val data = """{"Response":{"Choices":[{"Delta":{"Content":"tc3 text"}}]}}"""
+        val chunk = ProviderStreamParsers.forProtocol(ApiProtocol.TencentCloudTC3)
+            .parse(null, data)
+        assertEquals(ParsedSseChunk.Text("tc3 text"), chunk)
+    }
+
+    @Test
+    fun forProtocol_all_protocols_covered() {
+        // 验证所有 ApiProtocol 都有对应的解析器，不会抛异常
+        ApiProtocol.entries.forEach { protocol ->
+            val parser = ProviderStreamParsers.forProtocol(protocol)
+            assertNotNull("Parser for $protocol should not be null", parser)
+        }
     }
 
     @Test

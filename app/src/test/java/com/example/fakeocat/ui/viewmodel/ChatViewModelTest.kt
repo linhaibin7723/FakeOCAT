@@ -4,7 +4,9 @@ import app.cash.turbine.test
 import com.example.fakeocat.data.PreferencesManager
 import com.example.fakeocat.data.db.DatabaseHelper
 import com.example.fakeocat.data.db.entity.MessageEntity
+import com.example.fakeocat.network.AiModel
 import com.example.fakeocat.network.LlmClient
+import com.example.fakeocat.network.ModelFetcher
 import com.example.fakeocat.network.ResponseCache
 import com.example.fakeocat.network.TtsManager
 import io.mockk.*
@@ -32,6 +34,7 @@ class ChatViewModelTest {
     private val prefs: PreferencesManager = mockk(relaxed = true)
     private val ttsManager: TtsManager = mockk(relaxed = true)
     private val responseCache: ResponseCache = mockk(relaxed = true)
+    private val modelFetcher: ModelFetcher = mockk(relaxed = true)
 
     private lateinit var viewModel: ChatViewModel
 
@@ -50,7 +53,14 @@ class ChatViewModelTest {
         every { dbHelper.getAllMessagesFlow() } returns flowOf(emptyList())
         every { dbHelper.getBookmarkedMessagesFlow() } returns flowOf(emptyList())
 
-        viewModel = ChatViewModel(llmClient, dbHelper, prefs, ttsManager, responseCache)
+        viewModel = ChatViewModel(
+            prefs = prefs,
+            dbHelper = dbHelper,
+            llmClient = llmClient,
+            ttsManager = ttsManager,
+            responseCache = responseCache,
+            modelFetcher = modelFetcher
+        )
     }
 
     @After

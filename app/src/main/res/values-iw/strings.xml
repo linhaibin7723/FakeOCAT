@@ -16,6 +16,7 @@
     <string name="history_clear_all">נקה הכל</string>
     <string name="action_cancel">ביטול</string>
     <string name="action_delete">מחק</string>
+    <string name="action_clear">נקה</string>
     <string name="action_copy">העתק</string>
     <string name="action_read_aloud">הקרא בקול</string>
     <string name="action_bookmark">שמור</string>
@@ -59,6 +60,47 @@
     <string name="lang_czech">צ\'כית</string>
     <string name="lang_greek">יוונית</string>
     <string name="lang_hebrew">עברית</string>
+    <string name="settings_model">דגם</string>
+    <string name="settings_model_loading">מביא רשימת דגמים…</string>
+    <string name="settings_model_error">נכשל בהבאת רשימת דגמים</string>
+    <string name="settings_model_retry">נסה שוב</string>
+    <string name="settings_model_manual_input">הזן שם דגם ידנית</string>
+    <string name="settings_model_last_updated">רשימת דגמים עודכנה ב-%s</string>
+    <string name="settings_model_unsupported">ספק זה אינו תומך ברשימת דגמים אוטומטית</string>
+    <string name="settings_model_no_api_key">נא להזין מפתח API תחילה</string>
+
     <string name="error_no_api_key">חסר מפתח API! הגדר אותו בהגדרות.</string>
     <string name="error_network">שגיאת רשת. אנא נסה שוב.</string>
+
+    <!-- Endpoint Profile display names -->
+    <string name="endpoint_openai_direct">OpenAI (ישיר)</string>
+    <string name="endpoint_openai_azure">Azure OpenAI</string>
+    <string name="endpoint_anthropic_direct">Anthropic (ישיר)</string>
+    <string name="endpoint_anthropic_bedrock">AWS Bedrock</string>
+    <string name="endpoint_anthropic_vertex">GCP Vertex AI</string>
+    <string name="endpoint_gemini_studio">Google AI Studio</string>
+    <string name="endpoint_gemini_vertex">GCP Vertex AI</string>
+    <string name="endpoint_grok_direct">Grok (ישיר)</string>
+    <string name="endpoint_mimo_payg">תשלום לפי שימוש</string>
+    <string name="endpoint_mimo_token">חבילת טוקן</string>
+    <string name="endpoint_deepseek_direct">DeepSeek (ישיר)</string>
+    <string name="endpoint_qwen_compat">DashScope תואם</string>
+    <string name="endpoint_qwen_native">DashScope מקורי</string>
+    <string name="endpoint_ernie_v2">Qianfan v2</string>
+    <string name="endpoint_ernie_v1">Qianfan v1</string>
+    <string name="endpoint_hunyuan_independent">Hunyuan (עצמאי)</string>
+    <string name="endpoint_hunyuan_tc3">Tencent Cloud TC3</string>
+    <string name="endpoint_zhipu_direct">Zhipu AI (ישיר)</string>
+    <string name="endpoint_kimi_cn">סין (moonshot.cn)</string>
+    <string name="endpoint_kimi_international">בינלאומי (moonshot.ai)</string>
+    <string name="endpoint_minimax_direct">MiniMax (ישיר)</string>
+    <string name="endpoint_config_resource">שם משאב</string>
+    <string name="endpoint_config_deployment">שם פריסה</string>
+    <string name="endpoint_config_region">אזור</string>
+    <string name="endpoint_config_project">מזהה פרויקט</string>
+    <string name="endpoint_config_aws_access_key_id">מזהה מפתח גישה AWS</string>
+    <string name="endpoint_config_secret_id">מזהה סודי</string>
+    <string name="endpoint_selector_label">נקודת קצה API</string>
+    <string name="endpoint_config_label">הגדרות נקודת קצה</string>
+    <string name="endpoint_custom_url_hint">כתובת URL מותאמת אישית</string>
 </resources>

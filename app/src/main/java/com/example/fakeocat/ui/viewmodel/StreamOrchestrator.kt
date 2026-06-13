@@ -84,14 +84,19 @@ class StreamOrchestrator(
             }
         }
 
-        // === 第2步：异步预热连接 ===
+        // === 第2步：解析 EndpointProfile 和额外配置 ===
+        val profile = prefs.resolveEndpointProfile(provider)
+        val endpointConfig = prefs.getEndpointConfigMap(provider, profile.id)
+        Log.d(TAG, "Using profile: ${profile.id} for provider: $provider (protocol: ${profile.apiProtocol})")
+
+        // === 第3步：异步预热连接 ===
         ConnectionPrewarmer.warmUp(provider, apiKey)
 
-        // === 第3步：获取模型名 ===
-        val model = AiProviderCatalog.getProvider(provider)?.model ?: "gpt-5.4-mini"
+        // === 第4步：获取模型名（优先使用用户手动选择的模型） ===
+        val model = prefs.resolveModel(provider)
         Log.d(TAG, "Using model: $model for provider: $provider")
 
-        // === 第4步：缓存查询（仅 WhatMeans 模式） ===
+        // === 第5步：缓存查询（仅 WhatMeans 模式） ===
         val useCache = mode == "WhatMeans"
         val cacheKey = if (useCache) {
             ResponseCache.buildCacheKey(provider, model, mode, userText)
@@ -108,27 +113,22 @@ class StreamOrchestrator(
             Log.d(TAG, "ResponseCache MISS for $provider/$model ($mode)")
         }
 
-        // === 第5步：流式请求 + 重试 ===
+        // === 第6步：流式请求 + 重试 ===
         var assistantReply = ""
         try {
-            val modelsToTry = if (provider == "gemini") {
-                listOf(model)
-            } else {
-                listOf(model, AiProviderCatalog.getProvider(provider)?.model ?: "gpt-5.4-mini").distinct()
-            }
-            val baseUrlOverride = AiProviderCatalog.getProvider(provider)?.chatCompletionsUrl
+            val modelsToTry = listOf(model)
 
             var succeeded = false
             var lastError: String? = null
             for (m in modelsToTry) {
                 if (succeeded) break
                 val result = streamWithRetry(
-                    provider = provider,
+                    profile = profile,
                     apiKey = apiKey,
                     model = m,
                     systemPrompt = systemPrompt,
                     userPrompt = userPrompt,
-                    baseUrlOverride = baseUrlOverride
+                    endpointConfig = endpointConfig
                 ) { chunk ->
                     assistantReply += chunk
                     onToken(assistantReply)
@@ -141,7 +141,7 @@ class StreamOrchestrator(
             }
 
             if (!succeeded && assistantReply.isBlank()) {
-                onError(RuntimeException(lastError ?: "Network error"))
+                onError(RuntimeException(lastError ?: "No response received (stream ended without data)"))
                 return
             }
         } catch (_: CancellationException) {
@@ -159,7 +159,7 @@ class StreamOrchestrator(
             return
         }
 
-        // === 第6步：结果持久化 ===
+        // === 第7步：结果持久化 ===
         if (assistantReply.isNotEmpty()) {
             val assistantMsg = MessageEntity(text = assistantReply, isUser = false, mode = mode)
             val assistantId = dbHelper.insertMessage(assistantMsg)
@@ -177,40 +177,54 @@ class StreamOrchestrator(
      * 带重试的流式请求，加入 TTFT 计时日志。
      * 重试逻辑：最多 3 次，指数退避（500ms * attempt）。
      * 如果已收到首个 token 后失败，立即终止不再重试。
+     *
+     * 使用 [EndpointProfile] 版本的 LlmClient 接口。
      */
     private suspend fun streamWithRetry(
-        provider: String,
+        profile: com.example.fakeocat.network.EndpointProfile,
         apiKey: String,
         model: String,
         systemPrompt: String,
         userPrompt: String,
-        baseUrlOverride: String?,
+        endpointConfig: Map<String, String>,
         onChunk: (String) -> Unit
     ): StreamAttemptResult {
+        val messages = listOf(
+            mapOf("role" to "system", "content" to systemPrompt),
+            mapOf("role" to "user", "content" to userPrompt)
+        )
+
         var lastError: String? = null
         for (attempt in 0 until 3) {
             val receivedAny = AtomicBoolean(false)
             val ttftStartNanos = System.nanoTime()
             try {
-                Log.d(TAG, "Starting streamChat attempt=${attempt + 1} provider=$provider model=$model")
-                llmClient.streamChat(provider, apiKey, model, systemPrompt, userPrompt, baseUrlOverride)
-                    .collect { chunk ->
-                        val isFirst = receivedAny.compareAndSet(false, true)
-                        if (isFirst) {
-                            val ttftMs = (System.nanoTime() - ttftStartNanos) / 1_000_000
-                            Log.d(TAG, "TTFT: ${ttftMs}ms for $provider/$model (attempt=${attempt + 1})")
-                        }
-                        onChunk(chunk)
+                Log.d(TAG, "Starting streamChatWithProfile attempt=${attempt + 1} profile=${profile.id} model=$model")
+                llmClient.streamChatWithProfile(
+                    profile = profile,
+                    model = model,
+                    messages = messages,
+                    apiKey = apiKey,
+                    extraConfig = endpointConfig
+                ).collect { chunk ->
+                    val isFirst = receivedAny.compareAndSet(false, true)
+                    if (isFirst) {
+                        val ttftMs = (System.nanoTime() - ttftStartNanos) / 1_000_000
+                        Log.d(TAG, "TTFT: ${ttftMs}ms for ${profile.id}/$model (attempt=${attempt + 1})")
                     }
+                    onChunk(chunk)
+                }
                 return StreamAttemptResult(succeeded = true, abortFurtherTries = false, errorMessage = null)
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
-                Log.e(TAG, "Stream error provider=$provider model=$model attempt=${attempt + 1}: ${e.message}")
+                Log.e(TAG, "Stream error profile=${profile.id} model=$model attempt=${attempt + 1}: ${e.message}")
                 lastError = e.message
-                if (provider == "gemini" && (lastError?.contains("HTTP 429") == true || lastError?.contains("HTTP 404") == true)) {
+                // Gemini 特殊错误立即终止
+                if (lastError?.contains("HTTP 429") == true || lastError?.contains("HTTP 404") == true) {
                     return StreamAttemptResult(succeeded = false, abortFurtherTries = true, errorMessage = lastError)
                 }
+                // 已收到部分数据后失败，立即终止
                 if (receivedAny.get()) {
                     return StreamAttemptResult(succeeded = false, abortFurtherTries = true, errorMessage = lastError)
                 }

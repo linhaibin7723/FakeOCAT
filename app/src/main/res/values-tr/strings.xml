@@ -16,6 +16,7 @@
     <string name="history_clear_all">Tümünü Temizle</string>
     <string name="action_cancel">İptal</string>
     <string name="action_delete">Sil</string>
+    <string name="action_clear">Temizle</string>
     <string name="action_copy">Kopyala</string>
     <string name="action_read_aloud">Sesli Oku</string>
     <string name="action_bookmark">Kaydet</string>
@@ -59,6 +60,47 @@
     <string name="lang_czech">Çekçe</string>
     <string name="lang_greek">Yunanca</string>
     <string name="lang_hebrew">İbranice</string>
+    <string name="settings_model">Model</string>
+    <string name="settings_model_loading">Model listesi alınıyor…</string>
+    <string name="settings_model_error">Model listesi alınamadı</string>
+    <string name="settings_model_retry">Tekrar dene</string>
+    <string name="settings_model_manual_input">Model adını manuel girin</string>
+    <string name="settings_model_last_updated">Model listesi %s tarihinde güncellendi</string>
+    <string name="settings_model_unsupported">Bu sağlayıcı otomatik model listelemeyi desteklemez</string>
+    <string name="settings_model_no_api_key">Lütfen önce API anahtarını girin</string>
+
     <string name="error_no_api_key">API Anahtarı eksik! Ayarlardan ayarlayın.</string>
     <string name="error_network">Ağ hatası. Lütfen tekrar deneyin.</string>
+
+    <!-- Endpoint Profile display names -->
+    <string name="endpoint_openai_direct">OpenAI (Doğrudan)</string>
+    <string name="endpoint_openai_azure">Azure OpenAI</string>
+    <string name="endpoint_anthropic_direct">Anthropic (Doğrudan)</string>
+    <string name="endpoint_anthropic_bedrock">AWS Bedrock</string>
+    <string name="endpoint_anthropic_vertex">GCP Vertex AI</string>
+    <string name="endpoint_gemini_studio">Google AI Studio</string>
+    <string name="endpoint_gemini_vertex">GCP Vertex AI</string>
+    <string name="endpoint_grok_direct">Grok (Doğrudan)</string>
+    <string name="endpoint_mimo_payg">Kullandıkça öde</string>
+    <string name="endpoint_mimo_token">Token Planı</string>
+    <string name="endpoint_deepseek_direct">DeepSeek (Doğrudan)</string>
+    <string name="endpoint_qwen_compat">DashScope Uyumlu</string>
+    <string name="endpoint_qwen_native">DashScope Yerel</string>
+    <string name="endpoint_ernie_v2">Qianfan v2</string>
+    <string name="endpoint_ernie_v1">Qianfan v1</string>
+    <string name="endpoint_hunyuan_independent">Hunyuan (Bağımsız)</string>
+    <string name="endpoint_hunyuan_tc3">Tencent Cloud TC3</string>
+    <string name="endpoint_zhipu_direct">Zhipu AI (Doğrudan)</string>
+    <string name="endpoint_kimi_cn">Çin (moonshot.cn)</string>
+    <string name="endpoint_kimi_international">Uluslararası (moonshot.ai)</string>
+    <string name="endpoint_minimax_direct">MiniMax (Doğrudan)</string>
+    <string name="endpoint_config_resource">Kaynak Adı</string>
+    <string name="endpoint_config_deployment">Dağıtım Adı</string>
+    <string name="endpoint_config_region">Bölge</string>
+    <string name="endpoint_config_project">Proje Kimliği</string>
+    <string name="endpoint_config_aws_access_key_id">AWS Erişim Anahtarı Kimliği</string>
+    <string name="endpoint_config_secret_id">Gizli Kimlik</string>
+    <string name="endpoint_selector_label">API Uç Noktası</string>
+    <string name="endpoint_config_label">Uç Nokta Yapılandırması</string>
+    <string name="endpoint_custom_url_hint">Özel Temel URL</string>
 </resources>

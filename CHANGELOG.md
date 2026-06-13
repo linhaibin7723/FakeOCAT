@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-06-14
+
+### Added
+- 新增小米 MiMo Provider 支持，基于 OpenAI 兼容协议接入，API 地址 `api.xiaomimimo.com`。
+- MiMo 硬编码模型列表：`mimo-v2-flash`、`mimo-v2-pro`。
+- MiMo Token Plan 端点支持（`token-plan-cn.xiaomimimo.com`），兼容按量付费与 Token Plan 两种接入方式。
+
+### Fixed
+- 修复 Gemini `modelsEndpoint` 使用错误的 `/v1/` 路径，改为正确的 `/v1beta/models`。
+- 修复 `NetworkOnMainThreadException`：`LlmClient.streamChatWithProfile()` 中 OkHttp 同步调用未切换到 IO 调度器的问题。
+- 修复 SSE 流式解析中 `JSONObject.optString()` 将 JSON `null` 返回为字符串 `"null"` 导致的异常。
+- 过滤推理模型（如 MiMo）的 `reasoning_content` 思考过程，不再显示给用户。
+- 首 token 超时从 5 秒增大到 15 秒，兼容 Gemini 等 API 的冷启动场景。
+- 改进错误消息：不再显示 "Unknown error"，改为显示具体异常类型名。
+- 改进流结束无数据时的兜底错误消息。
+- 修复 MiMo API 域名（从 `api.mimogpt.com` 改为 `api.xiaomimimo.com`）。
+
+### Testing
+- 已验证：Google Gemini、小米 MiMo。
+- 未验证（暂无测试条件）：OpenAI、Anthropic Claude、DeepSeek、通义千问、腾讯混元、百度文心、智谱 GLM、Kimi (Moonshot)、MiniMax、Grok (xAI)。
+
 ## [1.0] - 2026-05-23
 
 ### Added

@@ -16,6 +16,7 @@
     <string name="history_clear_all">مسح الكل</string>
     <string name="action_cancel">إلغاء</string>
     <string name="action_delete">حذف</string>
+    <string name="action_clear">مسح</string>
     <string name="action_copy">نسخ</string>
     <string name="action_read_aloud">قراءة بصوت عالٍ</string>
     <string name="action_bookmark">حفظ</string>
@@ -59,6 +60,47 @@
     <string name="lang_czech">التشيكية</string>
     <string name="lang_greek">اليونانية</string>
     <string name="lang_hebrew">العبرية</string>
+    <string name="settings_model">النموذج</string>
+    <string name="settings_model_loading">جارٍ جلب قائمة النماذج…</string>
+    <string name="settings_model_error">فشل في جلب قائمة النماذج</string>
+    <string name="settings_model_retry">إعادة المحاولة</string>
+    <string name="settings_model_manual_input">إدخال اسم النموذج يدويًا</string>
+    <string name="settings_model_last_updated">تم تحديث قائمة النماذج في %s</string>
+    <string name="settings_model_unsupported">هذا المزود لا يدعم القائمة التلقائية للنماذج</string>
+    <string name="settings_model_no_api_key">يرجى إدخال مفتاح API أولاً</string>
+
     <string name="error_no_api_key">مفتاح API مفقود! قم بتعيينه في الإعدادات.</string>
     <string name="error_network">خطأ في الشبكة. يرجى المحاولة مرة أخرى.</string>
+
+    <!-- Endpoint Profile display names -->
+    <string name="endpoint_openai_direct">OpenAI (مباشر)</string>
+    <string name="endpoint_openai_azure">Azure OpenAI</string>
+    <string name="endpoint_anthropic_direct">Anthropic (مباشر)</string>
+    <string name="endpoint_anthropic_bedrock">AWS Bedrock</string>
+    <string name="endpoint_anthropic_vertex">GCP Vertex AI</string>
+    <string name="endpoint_gemini_studio">Google AI Studio</string>
+    <string name="endpoint_gemini_vertex">GCP Vertex AI</string>
+    <string name="endpoint_grok_direct">Grok (مباشر)</string>
+    <string name="endpoint_mimo_payg">حسب الاستخدام</string>
+    <string name="endpoint_mimo_token">خطة التوكن</string>
+    <string name="endpoint_deepseek_direct">DeepSeek (مباشر)</string>
+    <string name="endpoint_qwen_compat">DashScope متوافق</string>
+    <string name="endpoint_qwen_native">DashScope أصلي</string>
+    <string name="endpoint_ernie_v2">Qianfan v2</string>
+    <string name="endpoint_ernie_v1">Qianfan v1</string>
+    <string name="endpoint_hunyuan_independent">Hunyuan (مستقل)</string>
+    <string name="endpoint_hunyuan_tc3">Tencent Cloud TC3</string>
+    <string name="endpoint_zhipu_direct">Zhipu AI (مباشر)</string>
+    <string name="endpoint_kimi_cn">الصين (moonshot.cn)</string>
+    <string name="endpoint_kimi_international">دولي (moonshot.ai)</string>
+    <string name="endpoint_minimax_direct">MiniMax (مباشر)</string>
+    <string name="endpoint_config_resource">اسم المورد</string>
+    <string name="endpoint_config_deployment">اسم النشر</string>
+    <string name="endpoint_config_region">المنطقة</string>
+    <string name="endpoint_config_project">معرف المشروع</string>
+    <string name="endpoint_config_aws_access_key_id">معرف مفتاح الوصول AWS</string>
+    <string name="endpoint_config_secret_id">معرف السر</string>
+    <string name="endpoint_selector_label">نقطة نهاية API</string>
+    <string name="endpoint_config_label">إعداد نقطة النهاية</string>
+    <string name="endpoint_custom_url_hint">عنوان URL الأساسي المخصص</string>
 </resources>

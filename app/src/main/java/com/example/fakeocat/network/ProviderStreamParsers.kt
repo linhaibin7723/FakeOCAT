@@ -1,5 +1,8 @@
 package com.example.fakeocat.network
 
+import com.example.fakeocat.network.parsers.DashScopeNativeParser
+import com.example.fakeocat.network.parsers.QianfanV1Parser
+import com.example.fakeocat.network.parsers.TencentCloudTC3Parser
 import org.json.JSONObject
 
 internal sealed class ParsedSseChunk {
@@ -40,18 +43,13 @@ internal object ProviderStreamParsers {
     }
 
     /**
-     * 从 delta 对象中一次提取所有可能的文本字段。
-     * 按优先级返回：content > reasoning_content > reasoning。
+     * 从 delta 对象中提取正文文本字段。
+     * 仅返回 content 字段，忽略 reasoning_content / reasoning（思考过程）。
      */
     private fun extractDeltaContent(delta: JSONObject?): String? {
         if (delta == null) return null
-        // 一次调用 optString 而非多次链式调用
-        val content = delta.optString("content")
-        if (content.isNotEmpty()) return content
-        val reasoningContent = delta.optString("reasoning_content")
-        if (reasoningContent.isNotEmpty()) return reasoningContent
-        val reasoning = delta.optString("reasoning")
-        if (reasoning.isNotEmpty()) return reasoning
+        // 使用 optNullableString 避免 JSON null 被解析为字面量 "null"
+        delta.optNullableString("content")?.let { return it }
         return null
     }
 
@@ -61,7 +59,7 @@ internal object ProviderStreamParsers {
         if (isDoneToken(type, data)) return@ProviderStreamParser ParsedSseChunk.Done
         val obj = parseJson(data) ?: return@ProviderStreamParser ParsedSseChunk.Ignore
 
-        // choices[0].delta.(content|reasoning_content|reasoning)
+        // choices[0].delta.content
         val choice = extractFirstChoice(obj)
         val text = extractDeltaContent(choice?.optJSONObject("delta"))
             // choices[0].text（部分 provider 的非 delta 格式）
@@ -89,6 +87,17 @@ internal object ProviderStreamParsers {
     val gemini = ProviderStreamParser { type, data ->
         if (isDoneToken(type, data)) return@ProviderStreamParser ParsedSseChunk.Done
         val obj = parseJson(data) ?: return@ProviderStreamParser ParsedSseChunk.Ignore
+
+        // 检测 Gemini 错误响应（HTTP 200 但 body 包含 error 字段）
+        val errorObj = obj.optJSONObject("error")
+        if (errorObj != null) {
+            val code = errorObj.optInt("code", 0)
+            val message = errorObj.optString("message", "Unknown Gemini error")
+            val status = errorObj.optString("status", "")
+            return@ProviderStreamParser ParsedSseChunk.Text(
+                "[Gemini Error $code/$status] $message"
+            )
+        }
 
         val candidate = obj.optJSONArray("candidates")?.optJSONObject(0)
         val content = candidate?.optJSONObject("content")
@@ -140,6 +149,33 @@ internal object ProviderStreamParsers {
         }
     }
 
+    /**
+     * 按 [ApiProtocol] 分发解析器。
+     *
+     * 这是新的推荐入口，替代基于 provider ID 字符串的 [forProvider] 方法。
+     * 每种协议对应唯一解析器，同协议的不同端点变体（如 Azure OpenAI vs OpenAI）共享同一解析器。
+     */
+    fun forProtocol(protocol: ApiProtocol): ProviderStreamParser = when (protocol) {
+        ApiProtocol.OpenAICompatible,
+        ApiProtocol.AzureOpenAI -> openAiCompatible
+
+        ApiProtocol.AnthropicMessages,
+        ApiProtocol.BedrockAnthropic,
+        ApiProtocol.VertexAnthropic -> anthropic
+
+        ApiProtocol.GeminiNative,
+        ApiProtocol.VertexGemini -> gemini
+
+        ApiProtocol.DashScopeNative -> DashScopeNativeParser
+        ApiProtocol.QianfanV1RPC -> QianfanV1Parser
+        ApiProtocol.TencentCloudTC3 -> TencentCloudTC3Parser
+    }
+
+    /**
+     * 按 provider ID 字符串分发解析器（向后兼容）。
+     *
+     * 对于已迁移到 [ApiProtocol] 的场景，请优先使用 [forProtocol]。
+     */
     fun forProvider(provider: String): ProviderStreamParser = when (provider) {
         "anthropic" -> anthropic
         "gemini" -> gemini

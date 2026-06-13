@@ -16,6 +16,7 @@
     <string name="history_clear_all">Rensa allt</string>
     <string name="action_cancel">Avbryt</string>
     <string name="action_delete">Radera</string>
+    <string name="action_clear">Rensa</string>
     <string name="action_copy">Kopiera</string>
     <string name="action_read_aloud">Läs upp</string>
     <string name="action_bookmark">Spara</string>
@@ -59,6 +60,47 @@
     <string name="lang_czech">Tjeckiska</string>
     <string name="lang_greek">Grekiska</string>
     <string name="lang_hebrew">Hebreiska</string>
+    <string name="settings_model">Modell</string>
+    <string name="settings_model_loading">Hämtar modellista…</string>
+    <string name="settings_model_error">Kunde inte hämta modellistan</string>
+    <string name="settings_model_retry">Försök igen</string>
+    <string name="settings_model_manual_input">Ange modellnamn manuellt</string>
+    <string name="settings_model_last_updated">Modellista uppdaterad %s</string>
+    <string name="settings_model_unsupported">Denna leverantör stöder inte automatisk modellista</string>
+    <string name="settings_model_no_api_key">Ange API-nyckel först</string>
+
     <string name="error_no_api_key">API-nyckel saknas! Ange den i Inställningar.</string>
     <string name="error_network">Nätverksfel. Försök igen.</string>
+
+    <!-- Endpoint Profile display names -->
+    <string name="endpoint_openai_direct">OpenAI (Direkt)</string>
+    <string name="endpoint_openai_azure">Azure OpenAI</string>
+    <string name="endpoint_anthropic_direct">Anthropic (Direkt)</string>
+    <string name="endpoint_anthropic_bedrock">AWS Bedrock</string>
+    <string name="endpoint_anthropic_vertex">GCP Vertex AI</string>
+    <string name="endpoint_gemini_studio">Google AI Studio</string>
+    <string name="endpoint_gemini_vertex">GCP Vertex AI</string>
+    <string name="endpoint_grok_direct">Grok (Direkt)</string>
+    <string name="endpoint_mimo_payg">Betala per användning</string>
+    <string name="endpoint_mimo_token">Token-paket</string>
+    <string name="endpoint_deepseek_direct">DeepSeek (Direkt)</string>
+    <string name="endpoint_qwen_compat">DashScope Kompatibelt</string>
+    <string name="endpoint_qwen_native">DashScope Inbyggt</string>
+    <string name="endpoint_ernie_v2">Qianfan v2</string>
+    <string name="endpoint_ernie_v1">Qianfan v1</string>
+    <string name="endpoint_hunyuan_independent">Hunyuan (Oberoende)</string>
+    <string name="endpoint_hunyuan_tc3">Tencent Cloud TC3</string>
+    <string name="endpoint_zhipu_direct">Zhipu AI (Direkt)</string>
+    <string name="endpoint_kimi_cn">Kina (moonshot.cn)</string>
+    <string name="endpoint_kimi_international">Internationell (moonshot.ai)</string>
+    <string name="endpoint_minimax_direct">MiniMax (Direkt)</string>
+    <string name="endpoint_config_resource">Resursnamn</string>
+    <string name="endpoint_config_deployment">Implementeringsnamn</string>
+    <string name="endpoint_config_region">Region</string>
+    <string name="endpoint_config_project">Projekt-ID</string>
+    <string name="endpoint_config_aws_access_key_id">AWS åtkomstnyckel-ID</string>
+    <string name="endpoint_config_secret_id">Hemligt-ID</string>
+    <string name="endpoint_selector_label">API-slutpunkt</string>
+    <string name="endpoint_config_label">Slutpunktskonfiguration</string>
+    <string name="endpoint_custom_url_hint">Anpassad bas-URL</string>
 </resources>

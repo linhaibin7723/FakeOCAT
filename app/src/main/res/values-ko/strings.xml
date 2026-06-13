@@ -16,6 +16,7 @@
     <string name="history_clear_all">전체 삭제</string>
     <string name="action_cancel">취소</string>
     <string name="action_delete">삭제</string>
+    <string name="action_clear">지우기</string>
     <string name="action_copy">복사</string>
     <string name="action_read_aloud">읽어주기</string>
     <string name="action_bookmark">북마크</string>
@@ -53,6 +54,47 @@
     <string name="lang_id">인도네시아어</string>
     <string name="lang_hi">힌디어</string>
     <string name="lang_tr">터키어</string>
+    <string name="settings_model">모델</string>
+    <string name="settings_model_loading">모델 목록 가져오는 중…</string>
+    <string name="settings_model_error">모델 목록을 가져오지 못했습니다</string>
+    <string name="settings_model_retry">재시도</string>
+    <string name="settings_model_manual_input">모델 이름 직접 입력</string>
+    <string name="settings_model_last_updated">모델 목록 업데이트: %s</string>
+    <string name="settings_model_unsupported">이 제공자는 자동 모델 목록을 지원하지 않습니다</string>
+    <string name="settings_model_no_api_key">먼저 API 키를 입력하세요</string>
+
     <string name="error_no_api_key">API 키가 없습니다! 설정에서 입력해주세요.</string>
     <string name="error_network">네트워크 오류. 다시 시도해주세요.</string>
+
+    <!-- Endpoint Profile display names -->
+    <string name="endpoint_openai_direct">OpenAI (직접)</string>
+    <string name="endpoint_openai_azure">Azure OpenAI</string>
+    <string name="endpoint_anthropic_direct">Anthropic (직접)</string>
+    <string name="endpoint_anthropic_bedrock">AWS Bedrock</string>
+    <string name="endpoint_anthropic_vertex">GCP Vertex AI</string>
+    <string name="endpoint_gemini_studio">Google AI Studio</string>
+    <string name="endpoint_gemini_vertex">GCP Vertex AI</string>
+    <string name="endpoint_grok_direct">Grok (직접)</string>
+    <string name="endpoint_mimo_payg">종량제</string>
+    <string name="endpoint_mimo_token">톤킹 플랜</string>
+    <string name="endpoint_deepseek_direct">DeepSeek (직접)</string>
+    <string name="endpoint_qwen_compat">DashScope 호환</string>
+    <string name="endpoint_qwen_native">DashScope 네이티브</string>
+    <string name="endpoint_ernie_v2">Qianfan v2</string>
+    <string name="endpoint_ernie_v1">Qianfan v1</string>
+    <string name="endpoint_hunyuan_independent">Hunyuan (독립)</string>
+    <string name="endpoint_hunyuan_tc3">Tencent Cloud TC3</string>
+    <string name="endpoint_zhipu_direct">Zhipu AI (직접)</string>
+    <string name="endpoint_kimi_cn">중국 (moonshot.cn)</string>
+    <string name="endpoint_kimi_international">국제 (moonshot.ai)</string>
+    <string name="endpoint_minimax_direct">MiniMax (직접)</string>
+    <string name="endpoint_config_resource">리소스 이름</string>
+    <string name="endpoint_config_deployment">배포 이름</string>
+    <string name="endpoint_config_region">리전</string>
+    <string name="endpoint_config_project">프로젝트 ID</string>
+    <string name="endpoint_config_aws_access_key_id">AWS 액세스 키 ID</string>
+    <string name="endpoint_config_secret_id">시크릿 ID</string>
+    <string name="endpoint_selector_label">API 엔드포인트</string>
+    <string name="endpoint_config_label">엔드포인트 설정</string>
+    <string name="endpoint_custom_url_hint">사용자 지정 기본 URL</string>
 </resources>

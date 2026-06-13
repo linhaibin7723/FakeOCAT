@@ -16,6 +16,7 @@
     <string name="history_clear_all">सभी साफ़ करें</string>
     <string name="action_cancel">रद्द करें</string>
     <string name="action_delete">हटाएं</string>
+    <string name="action_clear">साफ़ करें</string>
     <string name="action_copy">कॉपी करें</string>
     <string name="action_read_aloud">ज़ोर से पढ़ें</string>
     <string name="action_bookmark">सहेजें</string>
@@ -59,6 +60,47 @@
     <string name="lang_czech">चेक</string>
     <string name="lang_greek">ग्रीक</string>
     <string name="lang_hebrew">हिब्रू</string>
+    <string name="settings_model">मॉडल</string>
+    <string name="settings_model_loading">मॉडल सूची प्राप्त हो रही है…</string>
+    <string name="settings_model_error">मॉडल सूची प्राप्त करने में विफल</string>
+    <string name="settings_model_retry">पुनः प्रयास करें</string>
+    <string name="settings_model_manual_input">मॉडल का नाम मैन्युअल रूप से दर्ज करें</string>
+    <string name="settings_model_last_updated">मॉडल सूची %s को अपडेट की गई</string>
+    <string name="settings_model_unsupported">यह प्रदाता स्वचालित मॉडल सूची का समर्थन नहीं करता</string>
+    <string name="settings_model_no_api_key">कृपया पहले API Key दर्ज करें</string>
+
     <string name="error_no_api_key">एपीआई कुंजी गायब है! सेटिंग्स में सेट करें।</string>
     <string name="error_network">नेटवर्क त्रुटि। कृपया पुनः प्रयास करें।</string>
+
+    <!-- Endpoint Profile display names -->
+    <string name="endpoint_openai_direct">OpenAI (प्रत्यक्ष)</string>
+    <string name="endpoint_openai_azure">Azure OpenAI</string>
+    <string name="endpoint_anthropic_direct">Anthropic (प्रत्यक्ष)</string>
+    <string name="endpoint_anthropic_bedrock">AWS Bedrock</string>
+    <string name="endpoint_anthropic_vertex">GCP Vertex AI</string>
+    <string name="endpoint_gemini_studio">Google AI Studio</string>
+    <string name="endpoint_gemini_vertex">GCP Vertex AI</string>
+    <string name="endpoint_grok_direct">Grok (प्रत्यक्ष)</string>
+    <string name="endpoint_mimo_payg">पे-एज़-यू-गो</string>
+    <string name="endpoint_mimo_token">टोकन प्लान</string>
+    <string name="endpoint_deepseek_direct">DeepSeek (प्रत्यक्ष)</string>
+    <string name="endpoint_qwen_compat">DashScope संगत</string>
+    <string name="endpoint_qwen_native">DashScope नेटिव</string>
+    <string name="endpoint_ernie_v2">Qianfan v2</string>
+    <string name="endpoint_ernie_v1">Qianfan v1</string>
+    <string name="endpoint_hunyuan_independent">Hunyuan (स्वतंत्र)</string>
+    <string name="endpoint_hunyuan_tc3">Tencent Cloud TC3</string>
+    <string name="endpoint_zhipu_direct">Zhipu AI (प्रत्यक्ष)</string>
+    <string name="endpoint_kimi_cn">चीन (moonshot.cn)</string>
+    <string name="endpoint_kimi_international">अंतरराष्ट्रीय (moonshot.ai)</string>
+    <string name="endpoint_minimax_direct">MiniMax (प्रत्यक्ष)</string>
+    <string name="endpoint_config_resource">संसाधन का नाम</string>
+    <string name="endpoint_config_deployment">तैनाती का नाम</string>
+    <string name="endpoint_config_region">क्षेत्र</string>
+    <string name="endpoint_config_project">प्रोजेक्ट आईडी</string>
+    <string name="endpoint_config_aws_access_key_id">AWS एक्सेस कुंजी आईडी</string>
+    <string name="endpoint_config_secret_id">गुप्त आईडी</string>
+    <string name="endpoint_selector_label">API एंडपॉइंट</string>
+    <string name="endpoint_config_label">एंडपॉइंट कॉन्फ़िगरेशन</string>
+    <string name="endpoint_custom_url_hint">कस्टम बेस URL</string>
 </resources>

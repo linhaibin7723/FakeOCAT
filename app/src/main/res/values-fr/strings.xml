@@ -16,6 +16,7 @@
     <string name="history_clear_all">Tout effacer</string>
     <string name="action_cancel">Annuler</string>
     <string name="action_delete">Supprimer</string>
+    <string name="action_clear">Effacer</string>
     <string name="action_copy">Copier</string>
     <string name="action_read_aloud">Lire à haute voix</string>
     <string name="action_bookmark">Favori</string>
@@ -59,6 +60,46 @@
     <string name="lang_czech">Tchèque</string>
     <string name="lang_greek">Grec</string>
     <string name="lang_hebrew">Hébreu</string>
+    <string name="settings_model">Modèle</string>
+    <string name="settings_model_loading">Récupération de la liste des modèles…</string>
+    <string name="settings_model_error">Échec de la récupération de la liste des modèles</string>
+    <string name="settings_model_retry">Réessayer</string>
+    <string name="settings_model_manual_input">Saisir le nom du modèle</string>
+    <string name="settings_model_last_updated">Liste des modèles mise à jour le %s</string>
+    <string name="settings_model_unsupported">Ce fournisseur ne prend pas en charge la liste automatique des modèles</string>
+    <string name="settings_model_no_api_key">Veuillez d\'abord saisir la clé API</string>
     <string name="error_no_api_key">Clé API manquante ! Configurez-la dans les Paramètres.</string>
     <string name="error_network">Erreur réseau. Veuillez réessayer.</string>
+
+    <!-- Endpoint Profile display names -->
+    <string name="endpoint_openai_direct">OpenAI (Direct)</string>
+    <string name="endpoint_openai_azure">Azure OpenAI</string>
+    <string name="endpoint_anthropic_direct">Anthropic (Direct)</string>
+    <string name="endpoint_anthropic_bedrock">AWS Bedrock</string>
+    <string name="endpoint_anthropic_vertex">GCP Vertex AI</string>
+    <string name="endpoint_gemini_studio">Google AI Studio</string>
+    <string name="endpoint_gemini_vertex">GCP Vertex AI</string>
+    <string name="endpoint_grok_direct">Grok (Direct)</string>
+    <string name="endpoint_mimo_payg">À l’unité</string>
+    <string name="endpoint_mimo_token">Plan Token</string>
+    <string name="endpoint_deepseek_direct">DeepSeek (Direct)</string>
+    <string name="endpoint_qwen_compat">DashScope Compatible</string>
+    <string name="endpoint_qwen_native">DashScope Natif</string>
+    <string name="endpoint_ernie_v2">Qianfan v2</string>
+    <string name="endpoint_ernie_v1">Qianfan v1</string>
+    <string name="endpoint_hunyuan_independent">Hunyuan (Indépendant)</string>
+    <string name="endpoint_hunyuan_tc3">Tencent Cloud TC3</string>
+    <string name="endpoint_zhipu_direct">Zhipu AI (Direct)</string>
+    <string name="endpoint_kimi_cn">Chine (moonshot.cn)</string>
+    <string name="endpoint_kimi_international">International (moonshot.ai)</string>
+    <string name="endpoint_minimax_direct">MiniMax (Direct)</string>
+    <string name="endpoint_config_resource">Nom de ressource</string>
+    <string name="endpoint_config_deployment">Nom de déploiement</string>
+    <string name="endpoint_config_region">Région</string>
+    <string name="endpoint_config_project">ID du projet</string>
+    <string name="endpoint_config_aws_access_key_id">ID de clé d’accès AWS</string>
+    <string name="endpoint_config_secret_id">ID secret</string>
+    <string name="endpoint_selector_label">Point d’accès API</string>
+    <string name="endpoint_config_label">Configuration du point d’accès</string>
+    <string name="endpoint_custom_url_hint">URL de base personnalisée</string>
 </resources>
