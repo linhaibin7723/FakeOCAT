@@ -69,6 +69,11 @@
     <string name="settings_model_unsupported">Ten dostawca nie obsługuje automatycznej listy modeli</string>
     <string name="settings_model_no_api_key">Najpierw wprowadź klucz API</string>
 
+    <string name="action_new_chat">Nowy czat</string>
+    <string name="action_stop">Zatrzymaj</string>
+    <string name="bookmarked">Dodano zakładkę</string>
+    <string name="bookmark_removed">Usunięto zakładkę</string>
+
     <string name="error_no_api_key">Brak klucza API! Ustaw go w ustawieniach.</string>
     <string name="error_network">Błąd sieci. Spróbuj ponownie.</string>
 

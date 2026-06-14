@@ -23,10 +23,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 改进错误消息：不再显示 "Unknown error"，改为显示具体异常类型名。
 - 改进流结束无数据时的兜底错误消息。
 - 修复 MiMo API 域名（从 `api.mimogpt.com` 改为 `api.xiaomimimo.com`）。
+- 修复 Release 构建中 API 端点名称显示为内部标识符（如 `endpoint_gemini_studio`）的问题：将 `displayNameRes` 从运行时字符串查找改为编译时 `@StringRes Int` 引用，避免 R8 资源缩减器移除动态查找的字符串资源。
+- 移除所有 AI 服务商的硬编码默认模型名称，模型列表完全由 API 动态获取。
+- 移除所有域名的证书固定（Certificate Pinning），解决 Google 等服务商证书轮换后 Release 构建 SSL 握手失败的问题。
+- 补全 21 种语言的缺失字符串 key（UI 操作字符串 + 语言名称），确保「跟随系统」语言选项在所有 locale 下正确工作。
 
 ### Testing
-- 已验证：Google Gemini、小米 MiMo。
-- 未验证（暂无测试条件）：OpenAI、Anthropic Claude、DeepSeek、通义千问、腾讯混元、百度文心、智谱 GLM、Kimi (Moonshot)、MiniMax、Grok (xAI)。
+- 已验证：Google Gemini、小米 MiMo、DeepSeek。
+- 未验证（暂无测试条件）：OpenAI、Anthropic Claude、通义千问、腾讯混元、百度文心、智谱 GLM、Kimi (Moonshot)、MiniMax、Grok (xAI)。
 
 ## [1.0] - 2026-05-23
 

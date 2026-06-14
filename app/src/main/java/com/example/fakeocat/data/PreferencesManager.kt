@@ -144,19 +144,13 @@ class PreferencesManager(
     }
 
     /**
-     * 获取实际使用的模型名。
-     * 优先使用用户为该 Provider 手动选择的模型；
-     * 其次使用 AiProviderInfo 中的硬编码默认模型。
+     * 获取用户为该 Provider 手动选择的模型名。
+     * 模型列表从 API 动态获取后由用户选择，不再使用硬编码默认值。
      */
     suspend fun resolveModel(providerId: String): String {
         val saved = context.dataStore.data.first()[selectedModelKey(providerId)] ?: ""
-        if (saved.isNotBlank()) {
-            Log.d(TAG, "Resolved model for $providerId: $saved (user selected)")
-            return saved
-        }
-        val default = AiProviderCatalog.getProvider(providerId)?.model ?: "gpt-5.4-mini"
-        Log.d(TAG, "Resolved model for $providerId: $default (default)")
-        return default
+        Log.d(TAG, "Resolved model for $providerId: ${saved.ifBlank { "(none)" }}")
+        return saved
     }
 
     // ══════════════════════════════════════════════

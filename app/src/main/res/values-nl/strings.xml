@@ -69,6 +69,11 @@
     <string name="settings_model_unsupported">Deze provider ondersteunt geen automatische modellijst</string>
     <string name="settings_model_no_api_key">Voer eerst de API-sleutel in</string>
 
+    <string name="action_new_chat">Nieuwe chat</string>
+    <string name="action_stop">Stoppen</string>
+    <string name="bookmarked">Bladwijzer toegevoegd</string>
+    <string name="bookmark_removed">Bladwijzer verwijderd</string>
+
     <string name="error_no_api_key">API-sleutel ontbreekt! Stel deze in bij Instellingen.</string>
     <string name="error_network">Netwerkfout. Probeer het opnieuw.</string>
 

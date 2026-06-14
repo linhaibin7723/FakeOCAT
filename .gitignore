@@ -68,3 +68,9 @@ google-services.json
 
 # --- Gradle 本地机器配置 ---
 gradle/gradle-daemon-jvm.properties
+
+# --- 构建日志 ---
+build-output.txt
+
+# --- 签名密钥文件（项目根目录） ---
+key

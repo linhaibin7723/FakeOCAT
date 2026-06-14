@@ -63,6 +63,33 @@
     <string name="settings_model_unsupported">このプロバイダーは自動モデル一覧取得に対応していません</string>
     <string name="settings_model_no_api_key">先にAPIキーを入力してください</string>
 
+    <string name="action_new_chat">新規チャット</string>
+    <string name="action_stop">停止</string>
+    <string name="bookmarked">ブックマークしました</string>
+    <string name="bookmark_removed">ブックマークを解除しました</string>
+    <string name="lang_chinese">中国語</string>
+    <string name="lang_english">英語</string>
+    <string name="lang_japanese">日本語</string>
+    <string name="lang_korean">韓国語</string>
+    <string name="lang_spanish">スペイン語</string>
+    <string name="lang_french">フランス語</string>
+    <string name="lang_german">ドイツ語</string>
+    <string name="lang_portuguese">ポルトガル語</string>
+    <string name="lang_russian">ロシア語</string>
+    <string name="lang_italian">イタリア語</string>
+    <string name="lang_arabic">アラビア語</string>
+    <string name="lang_thai">タイ語</string>
+    <string name="lang_vietnamese">ベトナム語</string>
+    <string name="lang_indonesian">インドネシア語</string>
+    <string name="lang_hindi">ヒンディー語</string>
+    <string name="lang_turkish">トルコ語</string>
+    <string name="lang_dutch">オランダ語</string>
+    <string name="lang_swedish">スウェーデン語</string>
+    <string name="lang_polish">ポーランド語</string>
+    <string name="lang_czech">チェコ語</string>
+    <string name="lang_greek">ギリシャ語</string>
+    <string name="lang_hebrew">ヘブライ語</string>
+
     <string name="error_no_api_key">APIキーが未設定です。設定画面で入力してください。</string>
     <string name="error_network">ネットワークエラー。もう一度お試しください。</string>
 

@@ -69,6 +69,11 @@
     <string name="settings_model_unsupported">यह प्रदाता स्वचालित मॉडल सूची का समर्थन नहीं करता</string>
     <string name="settings_model_no_api_key">कृपया पहले API Key दर्ज करें</string>
 
+    <string name="action_new_chat">नई चैट</string>
+    <string name="action_stop">रोकें</string>
+    <string name="bookmarked">बुकमार्क किया गया</string>
+    <string name="bookmark_removed">बुकमार्क हटाया गया</string>
+
     <string name="error_no_api_key">एपीआई कुंजी गायब है! सेटिंग्स में सेट करें।</string>
     <string name="error_network">नेटवर्क त्रुटि। कृपया पुनः प्रयास करें।</string>
 

@@ -2,6 +2,7 @@
     <string name="app_name">偽OCAT</string>
     <string name="hint_input">输入消息…</string>
     <string name="action_send">发送</string>
+    <string name="action_stop">停止</string>
     <string name="mode_how_to_say">用%s怎么说</string>
     <string name="mode_what_means">什么意思</string>
     <string name="mode_free_chat">自由提问</string>

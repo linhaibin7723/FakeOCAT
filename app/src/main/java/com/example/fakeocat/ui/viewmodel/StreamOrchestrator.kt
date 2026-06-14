@@ -92,8 +92,13 @@ class StreamOrchestrator(
         // === 第3步：异步预热连接 ===
         ConnectionPrewarmer.warmUp(provider, apiKey)
 
-        // === 第4步：获取模型名（优先使用用户手动选择的模型） ===
+        // === 第4步：获取模型名 ===
         val model = prefs.resolveModel(provider)
+        if (model.isBlank()) {
+            Log.w(TAG, "No model selected for provider: $provider")
+            onError(RuntimeException("请先在设置中选择一个模型"))
+            return
+        }
         Log.d(TAG, "Using model: $model for provider: $provider")
 
         // === 第5步：缓存查询（仅 WhatMeans 模式） ===

@@ -69,6 +69,11 @@
     <string name="settings_model_unsupported">Este proveedor no admite listado automático de modelos</string>
     <string name="settings_model_no_api_key">Por favor, introduzca primero la clave API</string>
 
+    <string name="action_new_chat">Nueva conversación</string>
+    <string name="action_stop">Detener</string>
+    <string name="bookmarked">Guardado en favoritos</string>
+    <string name="bookmark_removed">Eliminado de favoritos</string>
+
     <string name="error_no_api_key">¡Falta la clave API! Configúrala en Ajustes.</string>
     <string name="error_network">Error de red. Inténtalo de nuevo.</string>
 

@@ -69,6 +69,11 @@
     <string name="settings_model_unsupported">Nhà cung cấp này không hỗ trợ tự động lấy danh sách mô hình</string>
     <string name="settings_model_no_api_key">Vui lòng nhập API Key trước</string>
 
+    <string name="action_new_chat">Cuộc trò chuyện mới</string>
+    <string name="action_stop">Dừng</string>
+    <string name="bookmarked">Đã đánh dấu</string>
+    <string name="bookmark_removed">Đã gỡ dấu trang</string>
+
     <string name="error_no_api_key">Thiếu khóa API! Hãy thiết lập trong Cài đặt.</string>
     <string name="error_network">Lỗi mạng. Vui lòng thử lại.</string>
 

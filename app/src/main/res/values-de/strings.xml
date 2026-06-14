@@ -69,6 +69,11 @@
     <string name="settings_model_unsupported">Dieser Anbieter unterstützt keine automatische Modelliste</string>
     <string name="settings_model_no_api_key">Bitte zuerst den API-Schlüssel eingeben</string>
 
+    <string name="action_new_chat">Neuer Chat</string>
+    <string name="action_stop">Stopp</string>
+    <string name="bookmarked">Lesezeichen gespeichert</string>
+    <string name="bookmark_removed">Lesezeichen entfernt</string>
+
     <string name="error_no_api_key">API-Schlüssel fehlt! In den Einstellungen festlegen.</string>
     <string name="error_network">Netzwerkfehler. Bitte versuchen Sie es erneut.</string>
 

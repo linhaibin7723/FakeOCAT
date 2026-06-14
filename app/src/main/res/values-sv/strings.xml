@@ -69,6 +69,11 @@
     <string name="settings_model_unsupported">Denna leverantör stöder inte automatisk modellista</string>
     <string name="settings_model_no_api_key">Ange API-nyckel först</string>
 
+    <string name="action_new_chat">Ny chatt</string>
+    <string name="action_stop">Stoppa</string>
+    <string name="bookmarked">Bokmärkt</string>
+    <string name="bookmark_removed">Bokmärke borttaget</string>
+
     <string name="error_no_api_key">API-nyckel saknas! Ange den i Inställningar.</string>
     <string name="error_network">Nätverksfel. Försök igen.</string>
 

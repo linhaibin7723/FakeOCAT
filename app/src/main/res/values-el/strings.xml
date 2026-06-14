@@ -69,6 +69,11 @@
     <string name="settings_model_unsupported">Αυτός ο πάροχος δεν υποστηρίζει αυτόματη λίστα μοντέλων</string>
     <string name="settings_model_no_api_key">Εισαγάγετε πρώτα το κλειδί API</string>
 
+    <string name="action_new_chat">Νέα συνομιλία</string>
+    <string name="action_stop">Διακοπή</string>
+    <string name="bookmarked">Αποθηκεύτηκε</string>
+    <string name="bookmark_removed">Ο σελιδοδείκτης αφαιρέθηκε</string>
+
     <string name="error_no_api_key">Λείπει το κλειδί API! Ορίστε το στις Ρυθμίσεις.</string>
     <string name="error_network">Σφάλμα δικτύου. Παρακαλώ δοκιμάστε ξανά.</string>
 

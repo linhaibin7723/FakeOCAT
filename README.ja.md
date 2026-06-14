@@ -25,20 +25,20 @@ FakeOCAT は、複数の AI サービスに対応した語学学習 Android ア�
 
 ## 🤖 対応 AI プロバイダー
 
-| プロバイダー | エンドポイント | 認証方式 | デフォルトモデル |
-|-------------|---------------|----------|----------------|
-| **OpenAI** | ダイレクト / Azure OpenAI | Bearer Token / Azure API Key | `gpt-5.4-mini` |
-| **Anthropic** | ダイレクト / AWS Bedrock / GCP Vertex AI | API Key Header / AWS SigV4 / GCP OAuth 2.0 | `claude-haiku-4-5` |
-| **Gemini** | AI Studio / Vertex AI | API Key (Query) / GCP OAuth 2.0 | `gemini-2.5-flash` |
-| **Grok (xAI)** | ダイレクト | Bearer Token | `grok-3-mini` |
-| **小米 MiMo** | 従量課金 / Token Plan | Bearer Token | `mimo-v2-flash` |
-| **DeepSeek** | ダイレクト | Bearer Token | `deepseek-chat` |
-| **Alibaba 通義千問** | DashScope 互換 / DashScope ネイティブ | Bearer Token | `qwen-mt-lite` |
-| **Tencent 混元** | 独立 API / Tencent Cloud TC3 | Bearer Token / TC3-HMAC-SHA256 署名 | `hunyuan-lite` |
-| **百度文心一言** | 千帆 v2 / 千帆 v1 | Bearer Token / OAuth 2.0 Access Token | `ernie-speed-128k` |
-| **智譜 AI** | ダイレクト | Bearer Token | `glm-4.7-flash` |
-| **Kimi（月之暗面）** | 中国版 (moonshot.cn) / 国際版 (moonshot.ai) | Bearer Token | `moonshot-v1-8k` |
-| **MiniMax** | ダイレクト | Bearer Token | `minimax-m2.5-highspeed` |
+| プロバイダー | エンドポイント | 認証方式 |
+|-------------|---------------|----------|
+| **OpenAI** | ダイレクト / Azure OpenAI | Bearer Token / Azure API Key |
+| **Anthropic** | ダイレクト / AWS Bedrock / GCP Vertex AI | API Key Header / AWS SigV4 / GCP OAuth 2.0 |
+| **Gemini** | AI Studio / Vertex AI | API Key (Query) / GCP OAuth 2.0 |
+| **Grok (xAI)** | ダイレクト | Bearer Token |
+| **小米 MiMo** | 従量課金 / Token Plan | Bearer Token |
+| **DeepSeek** | ダイレクト | Bearer Token |
+| **Alibaba 通義千問** | DashScope 互換 / DashScope ネイティブ | Bearer Token |
+| **Tencent 混元** | 独立 API / Tencent Cloud TC3 | Bearer Token / TC3-HMAC-SHA256 署名 |
+| **百度文心一言** | 千帆 v2 / 千帆 v1 | Bearer Token / OAuth 2.0 Access Token |
+| **智譜 AI** | ダイレクト | Bearer Token |
+| **Kimi（月之暗面）** | 中国版 (moonshot.cn) / 国際版 (moonshot.ai) | Bearer Token |
+| **MiniMax** | ダイレクト | Bearer Token |
 
 ---
 
@@ -60,7 +60,6 @@ FakeOCAT は、複数の AI サービスに対応した語学学習 Android ア�
 - **DNS プリフェッチキャッシュ** — アプリ起動時にすべての AI プロバイダーのホスト名を非同期で事前解決し、初回リクエスト時の DNS ルックアップ遅延を排除。
 - **コネクションプリウォーム** — プロバイダー切替時に TCP + TLS 接続を事前確立し、初回ストリーミングリクエストの TTFT を短縮。
 - **共有コネクションプール** — アイドル接続 20 本、keep-alive 10 分で、重複ハンドシェイクのオーバーヘッドを削減。
-- **証明書ピンニング** — リリースビルドで有効化し、中間者攻撃を防止。
 - **ファーストトークンタイムアウト** — 15 秒の初回トークンタイムアウト検出。コールドスタート時の互換性を確保しつつ、長時間の待ちを回避。
 - **レスポンスキャッシュ** — メモリ LRU（128 エントリ）＋ディスクの二層キャッシュ。「どういう意味？」モードの短いクエリ結果を 30 分間キャッシュ。
 
@@ -100,7 +99,7 @@ FakeOCAT は、複数の AI サービスに対応した語学学習 Android ア�
 ### 必要環境
 
 - **Android Studio** — 最新安定版推奨（Ladybug 以降）
-- **JDK 17+** — プロジェクトの `gradle.properties` には Eclipse Adoptium JDK 25 へのパスが設定されています。ローカル環境に合わせて調整または削除してください
+- **JDK 21+** — Gradle 9.x は JDK 21 以上が必要です。プロジェクトの `gradle.properties` には Android Studio 付属の JBR へのパスが設定されています。ローカル環境に合わせて調整してください
 - **Android SDK** — Android Studio が自動管理（compileSdk 35, minSdk 24）
 
 ### クイックスタート
@@ -178,7 +177,7 @@ FakeOCAT/
 
 ## ⚠️ 免責事項
 
-アプリには 12 社のプロバイダー向けの統合コードが含まれていますが、個人開発の制約により、現在 **Gemini** と **小米 MiMo** が十分にテストされ、動作が保証されています。その他 10 社のプロバイダーアダプターは、実際の API キーにアクセスできない状態で実装された未検証のコードです。他のプロバイダーで問題が発生した場合は、Issue や Pull Request を歓迎します。
+アプリには 12 社のプロバイダー向けの統合コードが含まれていますが、個人開発の制約により、現在 **Gemini**、**小米 MiMo**、**DeepSeek** が十分にテストされ、動作が保証されています。その他 9 社のプロバイダーアダプターは、実際の API キーにアクセスできない状態で実装された未検証のコードです。他のプロバイダーで問題が発生した場合は、Issue や Pull Request を歓迎します。
 
 ---
 

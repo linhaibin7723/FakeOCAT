@@ -69,6 +69,11 @@
     <string name="settings_model_unsupported">ספק זה אינו תומך ברשימת דגמים אוטומטית</string>
     <string name="settings_model_no_api_key">נא להזין מפתח API תחילה</string>
 
+    <string name="action_new_chat">צ\'אט חדש</string>
+    <string name="action_stop">עצור</string>
+    <string name="bookmarked">נשמר בסימניות</string>
+    <string name="bookmark_removed">הסימניה הוסרה</string>
+
     <string name="error_no_api_key">חסר מפתח API! הגדר אותו בהגדרות.</string>
     <string name="error_network">שגיאת רשת. אנא נסה שוב.</string>
 

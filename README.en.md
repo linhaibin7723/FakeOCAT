@@ -25,20 +25,20 @@ FakeOCAT is a multi-AI-service language learning Android app, inspired by [OCAT]
 
 ## 🤖 Supported AI Providers
 
-| Provider | Endpoint Variants | Authentication | Default Model |
-|----------|-------------------|----------------|---------------|
-| **OpenAI** | Direct / Azure OpenAI | Bearer Token / Azure API Key | `gpt-5.4-mini` |
-| **Anthropic** | Direct / AWS Bedrock / GCP Vertex AI | API Key Header / AWS SigV4 / GCP OAuth 2.0 | `claude-haiku-4-5` |
-| **Gemini** | AI Studio / Vertex AI | API Key (Query) / GCP OAuth 2.0 | `gemini-2.5-flash` |
-| **Grok (xAI)** | Direct | Bearer Token | `grok-3-mini` |
-| **Xiaomi MiMo** | Pay-as-you-go / Token Plan | Bearer Token | `mimo-v2-flash` |
-| **DeepSeek** | Direct | Bearer Token | `deepseek-chat` |
-| **Alibaba Qwen** | DashScope Compatible / DashScope Native | Bearer Token | `qwen-mt-lite` |
-| **Tencent Hunyuan** | Independent API / Tencent Cloud TC3 | Bearer Token / TC3-HMAC-SHA256 Signing | `hunyuan-lite` |
-| **Baidu ERNIE** | Qianfan v2 / Qianfan v1 | Bearer Token / OAuth 2.0 Access Token | `ernie-speed-128k` |
-| **Zhipu AI** | Direct | Bearer Token | `glm-4.7-flash` |
-| **Kimi (Moonshot)** | China (moonshot.cn) / International (moonshot.ai) | Bearer Token | `moonshot-v1-8k` |
-| **MiniMax** | Direct | Bearer Token | `minimax-m2.5-highspeed` |
+| Provider | Endpoint Variants | Authentication |
+|----------|-------------------|----------------|
+| **OpenAI** | Direct / Azure OpenAI | Bearer Token / Azure API Key |
+| **Anthropic** | Direct / AWS Bedrock / GCP Vertex AI | API Key Header / AWS SigV4 / GCP OAuth 2.0 |
+| **Gemini** | AI Studio / Vertex AI | API Key (Query) / GCP OAuth 2.0 |
+| **Grok (xAI)** | Direct | Bearer Token |
+| **Xiaomi MiMo** | Pay-as-you-go / Token Plan | Bearer Token |
+| **DeepSeek** | Direct | Bearer Token |
+| **Alibaba Qwen** | DashScope Compatible / DashScope Native | Bearer Token |
+| **Tencent Hunyuan** | Independent API / Tencent Cloud TC3 | Bearer Token / TC3-HMAC-SHA256 Signing |
+| **Baidu ERNIE** | Qianfan v2 / Qianfan v1 | Bearer Token / OAuth 2.0 Access Token |
+| **Zhipu AI** | Direct | Bearer Token |
+| **Kimi (Moonshot)** | China (moonshot.cn) / International (moonshot.ai) | Bearer Token |
+| **MiniMax** | Direct | Bearer Token |
 
 ---
 
@@ -60,7 +60,6 @@ FakeOCAT is a multi-AI-service language learning Android app, inspired by [OCAT]
 - **DNS Prefetch Cache** — Asynchronously pre-resolves all AI provider hostnames at app launch, eliminating DNS lookup latency on first request.
 - **Connection Prewarming** — Pre-establishes TCP + TLS connections when switching providers, reducing TTFT for the first streaming request.
 - **Shared Connection Pool** — 20 idle connections with 10-minute keep-alive, reducing redundant handshake overhead.
-- **Certificate Pinning** — Enabled in release builds to prevent man-in-the-middle attacks.
 - **First Token Timeout** — 15-second first-token timeout detection, compatible with cold-start scenarios, for fast failure and avoiding long waits.
 - **Response Caching** — Dual-layer cache (in-memory LRU with 128 entries + disk), caching "What Means" mode short queries for 30 minutes.
 
@@ -100,7 +99,7 @@ FakeOCAT is a multi-AI-service language learning Android app, inspired by [OCAT]
 ### Requirements
 
 - **Android Studio** — Latest stable recommended (Ladybug or newer)
-- **JDK 17+** — The project has `gradle.properties` configured to point to Eclipse Adoptium JDK 25; adjust or remove this path for your local environment
+- **JDK 21+** — Gradle 9.x requires JDK 21 or above. The project's `gradle.properties` is configured to point to Android Studio's bundled JBR; adjust this path for your local environment
 - **Android SDK** — Managed automatically by Android Studio (compileSdk 35, minSdk 24)
 
 ### Quick Start
@@ -178,7 +177,7 @@ FakeOCAT/
 
 ## ⚠️ Disclaimer
 
-Although the app includes integration code for 12 providers, due to personal constraints only **Gemini** and **Xiaomi MiMo** have been fully tested and are guaranteed to work. The other 10 provider adapters are unverified implementations written without access to actual API keys. If you encounter issues with other providers, issues and pull requests are welcome.
+Although the app includes integration code for 12 providers, due to personal constraints only **Gemini**, **Xiaomi MiMo**, and **DeepSeek** have been fully tested and are guaranteed to work. The other 9 provider adapters are unverified implementations written without access to actual API keys. If you encounter issues with other providers, issues and pull requests are welcome.
 
 ---
 

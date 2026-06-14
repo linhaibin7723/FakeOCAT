@@ -69,6 +69,11 @@
     <string name="settings_model_unsupported">Penyedia ini tidak mendukung daftar model otomatis</string>
     <string name="settings_model_no_api_key">Silakan masukkan API Key terlebih dahulu</string>
 
+    <string name="action_new_chat">Obrolan Baru</string>
+    <string name="action_stop">Berhenti</string>
+    <string name="bookmarked">Ditandai</string>
+    <string name="bookmark_removed">Penanda dihapus</string>
+
     <string name="error_no_api_key">Kunci API hilang! Atur di Pengaturan.</string>
     <string name="error_network">Kesalahan jaringan. Silakan coba lagi.</string>
 

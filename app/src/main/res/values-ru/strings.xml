@@ -69,6 +69,11 @@
     <string name="settings_model_unsupported">Этот провайдер не поддерживает автоматическое получение списка моделей</string>
     <string name="settings_model_no_api_key">Сначала введите API-ключ</string>
 
+    <string name="action_new_chat">Новый чат</string>
+    <string name="action_stop">Остановить</string>
+    <string name="bookmarked">Добавлено в закладки</string>
+    <string name="bookmark_removed">Удалено из закладок</string>
+
     <string name="error_no_api_key">Отсутствует API-ключ! Установите его в настройках.</string>
     <string name="error_network">Ошибка сети. Попробуйте еще раз.</string>
 

@@ -69,6 +69,11 @@
     <string name="settings_model_unsupported">Bu sağlayıcı otomatik model listelemeyi desteklemez</string>
     <string name="settings_model_no_api_key">Lütfen önce API anahtarını girin</string>
 
+    <string name="action_new_chat">Yeni sohbet</string>
+    <string name="action_stop">Durdur</string>
+    <string name="bookmarked">Yer işaretlendi</string>
+    <string name="bookmark_removed">Yer işareti kaldırıldı</string>
+
     <string name="error_no_api_key">API Anahtarı eksik! Ayarlardan ayarlayın.</string>
     <string name="error_network">Ağ hatası. Lütfen tekrar deneyin.</string>
 

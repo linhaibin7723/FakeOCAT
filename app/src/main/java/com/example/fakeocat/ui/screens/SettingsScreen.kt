@@ -68,19 +68,6 @@ import com.example.fakeocat.ui.viewmodel.PromptBuilder
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-/**
- * 根据字符串资源名称解析为 Android 资源 ID。
- * 用于将 [EndpointProfile.displayNameRes] 和 [ExtraConfigField.displayNameRes]
- * 这样的字符串资源名（如 "endpoint_openai_direct"）转换为 [stringResource] 可用的 Int ID。
- */
-@Composable
-private fun resolveStringRes(name: String): Int {
-    val context = LocalContext.current
-    return remember(name) {
-        context.resources.getIdentifier(name, "string", context.packageName)
-    }
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
@@ -484,12 +471,7 @@ private fun EndpointSelector(
 ) {
     var expanded by remember { mutableStateOf(false) }
     val selectedProfile = profiles.find { it.id == selectedProfileId } ?: profiles.first()
-    val selectedDisplayNameRes = resolveStringRes(selectedProfile.displayNameRes)
-    val selectedDisplayName = if (selectedDisplayNameRes != 0) {
-        stringResource(selectedDisplayNameRes)
-    } else {
-        selectedProfile.displayNameRes
-    }
+    val selectedDisplayName = stringResource(selectedProfile.displayNameRes)
 
     ExposedDropdownMenuBox(
         expanded = expanded,
@@ -511,14 +493,8 @@ private fun EndpointSelector(
             onDismissRequest = { expanded = false }
         ) {
             profiles.forEach { profile ->
-                val displayNameRes = resolveStringRes(profile.displayNameRes)
-                val displayName = if (displayNameRes != 0) {
-                    stringResource(displayNameRes)
-                } else {
-                    profile.displayNameRes
-                }
                 DropdownMenuItem(
-                    text = { Text(displayName) },
+                    text = { Text(stringResource(profile.displayNameRes)) },
                     onClick = {
                         onProfileSelected(profile.id)
                         expanded = false
@@ -540,8 +516,7 @@ private fun ExtraConfigFieldInput(
     onValueChange: (String) -> Unit
 ) {
     var localValue by remember(value) { mutableStateOf(value) }
-    val labelResId = resolveStringRes(field.displayNameRes)
-    val label = if (labelResId != 0) stringResource(labelResId) else field.displayNameRes
+    val label = stringResource(field.displayNameRes)
 
     Spacer(modifier = Modifier.height(12.dp))
     OutlinedTextField(
@@ -586,11 +561,7 @@ private fun ModelSelectionSection(
     manualModelInput: String,
     onManualModelInputChange: (String) -> Unit
 ) {
-    val providerInfo = AiProviderCatalog.getProvider(
-        viewModel.selectedProvider.collectAsState().value
-    )
-    val defaultModelName = providerInfo?.model ?: ""
-    val displayModel = selectedModelName.ifBlank { defaultModelName }
+    val displayModel = selectedModelName
 
     // 模型名 + 刷新按钮
     Row(
@@ -606,7 +577,7 @@ private fun ModelSelectionSection(
                 modifier = Modifier.weight(1f),
                 singleLine = true,
                 shape = RoundedCornerShape(12.dp),
-                placeholder = { Text(defaultModelName) }
+                placeholder = { Text(stringResource(R.string.settings_model)) }
             )
             Spacer(modifier = Modifier.width(8.dp))
             TextButton(onClick = {
@@ -642,7 +613,6 @@ private fun ModelSelectionSection(
 
                 val models = when (modelFetchState) {
                     is ModelFetchState.Success -> modelFetchState.models
-                    is ModelFetchState.Unsupported -> AiProviderCatalog.ANTHROPIC_MODELS
                     else -> emptyList()
                 }
 
@@ -656,7 +626,7 @@ private fun ModelSelectionSection(
                                 text = {
                                     Text(
                                         model.displayName,
-                                        fontWeight = if (model.id == selectedModelName || (selectedModelName.isBlank() && model.id == defaultModelName))
+                                        fontWeight = if (model.id == selectedModelName)
                                             FontWeight.Bold else FontWeight.Normal
                                     )
                                 },

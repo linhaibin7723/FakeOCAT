@@ -50,17 +50,12 @@ class ModelFetcherTest {
     // ══════════════════════════════════════════════
 
     @Test
-    fun `fetchModels for Anthropic returns hardcoded models`() = runTest {
+    fun `fetchModels for Anthropic returns failure`() = runTest {
         val anthropic = AiProviderCatalog.getProvider("anthropic")!!
 
         val result = fetcher.fetchModels(anthropic, "test-key")
 
-        assertTrue(result.isSuccess)
-        val models = result.getOrNull()!!
-        assertTrue(models.isNotEmpty())
-        assertTrue(models.any { it.id == "claude-haiku-4-5" })
-        // 验证缓存也被写入
-        assertNotNull(ModelCache.get("anthropic"))
+        assertTrue(result.isFailure)
     }
 
     // ══════════════════════════════════════════════

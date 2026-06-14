@@ -1,7 +1,6 @@
 package com.example.fakeocat.network
 
 import android.util.Log
-import com.example.fakeocat.BuildConfig
 import com.example.fakeocat.network.auth.AwsSigV4Signer
 import com.example.fakeocat.network.auth.BaiduAccessTokenFetcher
 import com.example.fakeocat.network.auth.GcpOAuth2Signer
@@ -14,7 +13,6 @@ import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.CertificatePinner
 import okhttp3.ConnectionPool
 import okhttp3.Dns
 import okhttp3.MediaType.Companion.toMediaType
@@ -102,21 +100,6 @@ class LlmClient() {
         private fun w(msg: String) = safeLog(Log.WARN, msg)
         private fun e(msg: String, tr: Throwable? = null) = safeLog(Log.ERROR, msg, tr)
         private const val FIRST_TOKEN_TIMEOUT_MS = 15_000L
-        /** 证书固定引脚（SHA256 哈希）。仅在 Release 构建时启用。 */
-        private val certificatePinner = CertificatePinner.Builder()
-            .add("generativelanguage.googleapis.com",
-                "sha256/vqg5bUG+qXcqS0J4VsQyBG/rH/5mQLKLYCpFr4bebvk=")
-            .add("api.openai.com",
-                "sha256/rwQEJp/dzuKRR34exkV/Eg+BvIqclbrD/QqVK44O1n0=")
-            .add("api.anthropic.com",
-                "sha256/PLNqWhvts4aLeuvBGZ2pDdKMfEF+w24PNmK0lnIH0Jc=")
-            .add("api.deepseek.com",
-                "sha256/v6jE0yqApnVtkKqJ7dSnRru0HkMRhcv5JhX1Pz4/z9I=")
-            .add("api.mistral.ai",
-                "sha256/9RArj3lJHCZ5gMr0qDVOjZs2UJ+emZfRvhQ7v+xY/KM=")
-            .add("api.x.ai",
-                "sha256/3HeDDOKCxGnZy3pDdKm1lhOIG/kSaLFUjYRTCpM8lMA=")
-            .build()
         private const val CONNECT_TIMEOUT_SEC = 10L
         private const val READ_TIMEOUT_SEC = 30L
         private const val WRITE_TIMEOUT_SEC = 30L
@@ -140,12 +123,6 @@ class LlmClient() {
         .readTimeout(READ_TIMEOUT_SEC, TimeUnit.SECONDS)
         .writeTimeout(WRITE_TIMEOUT_SEC, TimeUnit.SECONDS)
         .retryOnConnectionFailure(true)
-        .apply {
-            // 证书固定：仅在 Release 构建时启用，防止 MITM 攻击
-            if (!BuildConfig.DEBUG) {
-                certificatePinner(certificatePinner)
-            }
-        }
         .build()
 
     /** 流式 HTTP 客户端（长连接，readTimeout = 0） */

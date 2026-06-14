@@ -68,6 +68,10 @@
     <string name="settings_model_last_updated">Elenco modelli aggiornato il %s</string>
     <string name="settings_model_unsupported">Questo provider non supporta l\'elenco automatico dei modelli</string>
     <string name="settings_model_no_api_key">Inserisci prima la chiave API</string>
+    <string name="action_new_chat">Nuova chat</string>
+    <string name="action_stop">Ferma</string>
+    <string name="bookmarked">Aggiunto ai preferiti</string>
+    <string name="bookmark_removed">Rimosso dai preferiti</string>
     <string name="error_no_api_key">Chiave API mancante! Configurala nelle Impostazioni.</string>
     <string name="error_network">Errore di rete. Riprova.</string>
 

@@ -32,3 +32,6 @@
     public static *** v(...);
     public static *** i(...);
 }
+
+# ── Google Tink (errorprone 注解) ──
+-dontwarn com.google.errorprone.annotations.**

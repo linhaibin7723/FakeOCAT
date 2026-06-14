@@ -1,5 +1,7 @@
 package com.example.fakeocat.network
 
+import androidx.annotation.StringRes
+
 /**
  * API 协议类型，决定请求体构建和响应流解析逻辑。
  * 每种协议对应 [RequestBuilder] 中的一个构建函数和 [ProviderStreamParsers] 中的一个解析器。
@@ -69,14 +71,14 @@ enum class AiAuthScheme {
  * 额外配置字段，用于需要用户输入额外参数的端点（如 Azure resource name、AWS region 等）。
  *
  * @param key           存储键名，全局唯一（如 "resource"、"region"、"project"）
- * @param displayNameRes Android string resource key，用于 UI 显示
+ * @param displayNameRes Android string resource ID（如 `R.string.endpoint_config_region`），用于 UI 显示
  * @param placeholder    输入框占位文本
  * @param required       是否必填
  * @param isSecret       是否为敏感信息（决定存储在 EncryptedSharedPreferences 还是 DataStore）
  */
 data class ExtraConfigField(
     val key: String,
-    val displayNameRes: String,
+    @param:StringRes val displayNameRes: Int,
     val placeholder: String = "",
     val required: Boolean = true,
     val isSecret: Boolean = false
@@ -88,7 +90,7 @@ data class ExtraConfigField(
  * 一个 [AiProviderInfo] 可包含多个 EndpointProfile，每个代表该 Provider 的一种接入方式。
  *
  * @param id                Profile 唯一标识（在同一个 Provider 内唯一），如 "direct"、"azure"、"token_plan"
- * @param displayNameRes    Android string resource key，用于 UI 下拉显示
+ * @param displayNameRes    Android string resource ID（如 `R.string.endpoint_openai_direct`），用于 UI 下拉显示
  * @param chatCompletionsUrl 聊天补全端点 URL 模板，可含 {placeholder} 占位符
  * @param modelsEndpoint    模型列表端点 URL 模板，null 表示不支持动态模型列表
  * @param authScheme        认证方案
@@ -98,7 +100,7 @@ data class ExtraConfigField(
  */
 data class EndpointProfile(
     val id: String,
-    val displayNameRes: String,
+    @param:StringRes val displayNameRes: Int,
     val chatCompletionsUrl: String,
     val modelsEndpoint: String? = null,
     val authScheme: AiAuthScheme,

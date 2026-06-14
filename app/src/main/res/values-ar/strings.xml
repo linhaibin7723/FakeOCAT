@@ -69,6 +69,11 @@
     <string name="settings_model_unsupported">هذا المزود لا يدعم القائمة التلقائية للنماذج</string>
     <string name="settings_model_no_api_key">يرجى إدخال مفتاح API أولاً</string>
 
+    <string name="action_new_chat">محادثة جديدة</string>
+    <string name="action_stop">إيقاف</string>
+    <string name="bookmarked">تم الحفظ في المفضلة</string>
+    <string name="bookmark_removed">تمت إزالة المفضلة</string>
+
     <string name="error_no_api_key">مفتاح API مفقود! قم بتعيينه في الإعدادات.</string>
     <string name="error_network">خطأ في الشبكة. يرجى المحاولة مرة أخرى.</string>
 

@@ -68,6 +68,10 @@
     <string name="settings_model_last_updated">Liste des modèles mise à jour le %s</string>
     <string name="settings_model_unsupported">Ce fournisseur ne prend pas en charge la liste automatique des modèles</string>
     <string name="settings_model_no_api_key">Veuillez d\'abord saisir la clé API</string>
+    <string name="action_new_chat">Nouvelle conversation</string>
+    <string name="action_stop">Arrêter</string>
+    <string name="bookmarked">Ajouté aux favoris</string>
+    <string name="bookmark_removed">Retiré des favoris</string>
     <string name="error_no_api_key">Clé API manquante ! Configurez-la dans les Paramètres.</string>
     <string name="error_network">Erreur réseau. Veuillez réessayer.</string>
 

@@ -10,23 +10,14 @@ import org.junit.Test
 class AiProviderCatalogTest {
 
     @Test
-    fun providers_match_required_order_and_models() {
+    fun providers_match_required_order() {
         val expected = listOf(
-            "openai" to "gpt-5.4-mini",
-            "anthropic" to "claude-haiku-4-5",
-            "gemini" to "gemini-2.5-flash",
-            "grok" to "grok-3-mini",
-            "mimo" to "mimo-v2-flash",
-            "deepseek" to "deepseek-chat",
-            "qwen" to "qwen-mt-lite",
-            "hunyuan" to "hunyuan-lite",
-            "ernie" to "ernie-speed-128k",
-            "zhipu" to "glm-4.7-flash",
-            "kimi" to "moonshot-v1-8k",
-            "minimax" to "minimax-m2.5-highspeed"
+            "openai", "anthropic", "gemini", "grok",
+            "mimo", "deepseek", "qwen", "hunyuan",
+            "ernie", "zhipu", "kimi", "minimax"
         )
 
-        val actual = AiProviderCatalog.providers.map { it.id to it.model }
+        val actual = AiProviderCatalog.providers.map { it.id }
         assertEquals(expected, actual)
     }
 
@@ -67,12 +58,6 @@ class AiProviderCatalogTest {
         assertNotNull(gemini)
         assertNotNull(gemini!!.modelsEndpoint)
         assertEquals(true, gemini.supportsModelList)
-    }
-
-    @Test
-    fun anthropic_hardcoded_models_exist() {
-        assertTrue(AiProviderCatalog.ANTHROPIC_MODELS.isNotEmpty())
-        assertTrue(AiProviderCatalog.ANTHROPIC_MODELS.all { it.id.isNotBlank() })
     }
 
     @Test

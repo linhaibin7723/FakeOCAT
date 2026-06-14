@@ -69,6 +69,11 @@
     <string name="settings_model_unsupported">ผู้ให้บริการนี้ไม่รองรับการแสดงรายการโมเดลอัตโนมัติ</string>
     <string name="settings_model_no_api_key">กรุณากรอก API Key ก่อน</string>
 
+    <string name="action_new_chat">แชทใหม่</string>
+    <string name="action_stop">หยุด</string>
+    <string name="bookmarked">บันทึกแล้ว</string>
+    <string name="bookmark_removed">ลบบุ๊กมาร์กแล้ว</string>
+
     <string name="error_no_api_key">ไม่มีคีย์ API! โปรดตั้งค่าในการตั้งค่า</string>
     <string name="error_network">ข้อผิดพลาดเครือข่าย โปรดลองอีกครั้ง</string>
 

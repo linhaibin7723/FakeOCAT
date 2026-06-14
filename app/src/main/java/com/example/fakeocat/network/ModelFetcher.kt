@@ -62,10 +62,9 @@ class ModelFetcher(private val httpClient: OkHttpClient) {
 
         // 2. 不支持动态列表的 Provider
         if (!provider.supportsModelList) {
-            val hardcoded = AiProviderCatalog.HARDCODED_MODELS[provider.id]
-                ?: AiProviderCatalog.ANTHROPIC_MODELS
-            ModelCache.put(provider.id, hardcoded)
-            return@withContext Result.success(hardcoded)
+            return@withContext Result.failure(
+                ModelFetchException(message = "Provider ${provider.id} does not support dynamic model list")
+            )
         }
 
         // 3. 发起网络请求
@@ -82,13 +81,8 @@ class ModelFetcher(private val httpClient: OkHttpClient) {
                 else -> fetchOpenAICompatibleModels(endpoint, apiKey, provider.id)
             }
 
-            // 4. 空列表降级：API 不支持模型列表端点时，回退到硬编码模型
+            // 4. 空列表降级
             if (models.isEmpty()) {
-                val hardcoded = AiProviderCatalog.HARDCODED_MODELS[provider.id]
-                if (hardcoded != null) {
-                    ModelCache.put(provider.id, hardcoded)
-                    return@withContext Result.success(hardcoded)
-                }
                 return@withContext Result.failure(
                     ModelFetchException(message = "Empty model list for ${provider.id}")
                 )
@@ -104,12 +98,6 @@ class ModelFetcher(private val httpClient: OkHttpClient) {
             val stale = ModelCache.getOrNull(provider.id)
             if (stale != null) {
                 return@withContext Result.success(stale)
-            }
-            // 7. 最终降级：硬编码模型（仅限有预设列表的 provider）
-            val hardcoded = AiProviderCatalog.HARDCODED_MODELS[provider.id]
-            if (hardcoded != null) {
-                ModelCache.put(provider.id, hardcoded)
-                return@withContext Result.success(hardcoded)
             }
             Result.failure(e)
         }
@@ -150,10 +138,9 @@ class ModelFetcher(private val httpClient: OkHttpClient) {
 
         // 2. 不支持动态列表的 Profile
         if (!profile.supportsModelList || profile.modelsEndpoint.isNullOrBlank()) {
-            val hardcoded = AiProviderCatalog.HARDCODED_MODELS[providerId]
-                ?: AiProviderCatalog.ANTHROPIC_MODELS
-            ModelCache.put(cacheKey, hardcoded)
-            return@withContext Result.success(hardcoded)
+            return@withContext Result.failure(
+                ModelFetchException(message = "Profile ${profile.id} does not support dynamic model list")
+            )
         }
 
         // 3. 解析模型列表 URL
@@ -163,13 +150,8 @@ class ModelFetcher(private val httpClient: OkHttpClient) {
         try {
             val models = fetchModelListWithProfile(profile, modelsUrl, apiKey, endpointConfig, providerId)
 
-            // 4. 空列表降级：API 不支持模型列表端点时，回退到硬编码模型
+            // 4. 空列表降级
             if (models.isEmpty()) {
-                val hardcoded = AiProviderCatalog.HARDCODED_MODELS[providerId]
-                if (hardcoded != null) {
-                    ModelCache.put(cacheKey, hardcoded)
-                    return@withContext Result.success(hardcoded)
-                }
                 return@withContext Result.failure(
                     ModelFetchException(message = "Empty model list for $cacheKey")
                 )
@@ -185,12 +167,6 @@ class ModelFetcher(private val httpClient: OkHttpClient) {
             val stale = ModelCache.getOrNull(cacheKey)
             if (stale != null) {
                 return@withContext Result.success(stale)
-            }
-            // 7. 最终降级：硬编码模型（仅限有预设列表的 provider）
-            val hardcoded = AiProviderCatalog.HARDCODED_MODELS[providerId]
-            if (hardcoded != null) {
-                ModelCache.put(cacheKey, hardcoded)
-                return@withContext Result.success(hardcoded)
             }
             Result.failure(e)
         }

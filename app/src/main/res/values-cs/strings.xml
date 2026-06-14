@@ -69,6 +69,11 @@
     <string name="settings_model_unsupported">Tento poskytovatel nepodporuje automatický seznam modelů</string>
     <string name="settings_model_no_api_key">Nejprve zadejte API klíč</string>
 
+    <string name="action_new_chat">Nový chat</string>
+    <string name="action_stop">Zastavit</string>
+    <string name="bookmarked">Záložka přidána</string>
+    <string name="bookmark_removed">Záložka odebrána</string>
+
     <string name="error_no_api_key">Chybí API klíč! Nastavte jej v Nastavení.</string>
     <string name="error_network">Chyba sítě. Zkuste to prosím znovu.</string>
 

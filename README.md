@@ -25,20 +25,20 @@ FakeOCAT 是一款支持多种 AI 服务的语言学习 Android 应用，受 [OC
 
 ## 🤖 支持的 AI 服务商
 
-| 服务商 | 端点变体 | 认证方式 | 默认模型 |
-|--------|----------|----------|----------|
-| **OpenAI** | 直连 / Azure OpenAI | Bearer Token / Azure API Key | `gpt-5.4-mini` |
-| **Anthropic** | 直连 / AWS Bedrock / GCP Vertex AI | API Key Header / AWS SigV4 / GCP OAuth 2.0 | `claude-haiku-4-5` |
-| **Gemini** | AI Studio / Vertex AI | API Key (Query) / GCP OAuth 2.0 | `gemini-2.5-flash` |
-| **Grok (xAI)** | 直连 | Bearer Token | `grok-3-mini` |
-| **小米 MiMo** | 按量付费 / Token Plan | Bearer Token | `mimo-v2-flash` |
-| **DeepSeek** | 直连 | Bearer Token | `deepseek-chat` |
-| **阿里千问** | DashScope 兼容模式 / DashScope 原生 API | Bearer Token | `qwen-mt-lite` |
-| **腾讯混元** | 独立 API / 腾讯云 TC3 | Bearer Token / TC3-HMAC-SHA256 签名 | `hunyuan-lite` |
-| **百度文心一言** | 千帆 v2 / 千帆 v1 | Bearer Token / OAuth 2.0 Access Token | `ernie-speed-128k` |
-| **智谱 AI** | 直连 | Bearer Token | `glm-4.7-flash` |
-| **Kimi（月之暗面）** | 中国版 (moonshot.cn) / 国际版 (moonshot.ai) | Bearer Token | `moonshot-v1-8k` |
-| **MiniMax** | 直连 | Bearer Token | `minimax-m2.5-highspeed` |
+| 服务商 | 端点变体 | 认证方式 |
+|--------|----------|----------|
+| **OpenAI** | 直连 / Azure OpenAI | Bearer Token / Azure API Key |
+| **Anthropic** | 直连 / AWS Bedrock / GCP Vertex AI | API Key Header / AWS SigV4 / GCP OAuth 2.0 |
+| **Gemini** | AI Studio / Vertex AI | API Key (Query) / GCP OAuth 2.0 |
+| **Grok (xAI)** | 直连 | Bearer Token |
+| **小米 MiMo** | 按量付费 / Token Plan | Bearer Token |
+| **DeepSeek** | 直连 | Bearer Token |
+| **阿里千问** | DashScope 兼容模式 / DashScope 原生 API | Bearer Token |
+| **腾讯混元** | 独立 API / 腾讯云 TC3 | Bearer Token / TC3-HMAC-SHA256 签名 |
+| **百度文心一言** | 千帆 v2 / 千帆 v1 | Bearer Token / OAuth 2.0 Access Token |
+| **智谱 AI** | 直连 | Bearer Token |
+| **Kimi（月之暗面）** | 中国版 (moonshot.cn) / 国际版 (moonshot.ai) | Bearer Token |
+| **MiniMax** | 直连 | Bearer Token |
 
 ---
 
@@ -60,7 +60,6 @@ FakeOCAT 是一款支持多种 AI 服务的语言学习 Android 应用，受 [OC
 - **DNS 预解析缓存** — 应用启动时异步预解析所有 AI 服务商域名，消除首次请求的 DNS 查询延迟。
 - **连接预热** — 切换服务商时提前建立 TCP + TLS 连接，降低首次流式请求的 TTFT。
 - **共享连接池** — 20 个空闲连接、10 分钟 keep-alive，减少重复握手开销。
-- **证书固定** — Release 构建启用 Certificate Pinning，防止中间人攻击。
 - **首 token 超时** — 15 秒首 token 超时检测，兼容冷启动场景，快速失败避免长时间等待。
 - **响应缓存** — 内存 LRU（128 条）+ 磁盘双层缓存，"什么意思"模式的短查询结果缓存 30 分钟。
 
@@ -100,7 +99,7 @@ FakeOCAT 是一款支持多种 AI 服务的语言学习 Android 应用，受 [OC
 ### 环境要求
 
 - **Android Studio** — 推荐最新稳定版（Ladybug 或更新）
-- **JDK 17+** — 项目已在 `gradle.properties` 中配置指向 Eclipse Adoptium JDK 25 的路径，您可根据本地环境修改或移除该配置
+- **JDK 21+** — Gradle 9.x 需要 JDK 21 或以上。项目已在 `gradle.properties` 中配置指向 Android Studio 附带的 JBR 路径，请根据本地环境调整
 - **Android SDK** — 由 Android Studio 自动管理（compileSdk 35, minSdk 24）
 
 ### 快速开始
@@ -178,7 +177,7 @@ FakeOCAT/
 
 ## ⚠️ 免责声明
 
-虽然应用内集成了 12 家服务商的代码，但受限于个人条件，目前 **Gemini** 和 **小米 MiMo** 已经过完整测试并确保可用。其他 10 家服务商的适配代码为"盲写"实现，未经实际 API 验证。如在使用其他服务商时遇到问题，欢迎提交 Issue 或 Pull Request。
+虽然应用内集成了 12 家服务商的代码，但受限于个人条件，目前 **Gemini**、**小米 MiMo** 和 **DeepSeek** 已经过完整测试并确保可用。其他 9 家服务商的适配代码为"盲写"实现，未经实际 API 验证。如在使用其他服务商时遇到问题，欢迎提交 Issue 或 Pull Request。
 
 ---
 

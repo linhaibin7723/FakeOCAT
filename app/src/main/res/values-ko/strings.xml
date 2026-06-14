@@ -63,6 +63,33 @@
     <string name="settings_model_unsupported">이 제공자는 자동 모델 목록을 지원하지 않습니다</string>
     <string name="settings_model_no_api_key">먼저 API 키를 입력하세요</string>
 
+    <string name="action_new_chat">새 채팅</string>
+    <string name="action_stop">중지</string>
+    <string name="bookmarked">북마크 완료</string>
+    <string name="bookmark_removed">북마크 해제됨</string>
+    <string name="lang_chinese">중국어</string>
+    <string name="lang_english">영어</string>
+    <string name="lang_japanese">일본어</string>
+    <string name="lang_korean">한국어</string>
+    <string name="lang_spanish">스페인어</string>
+    <string name="lang_french">프랑스어</string>
+    <string name="lang_german">독일어</string>
+    <string name="lang_portuguese">포르투갈어</string>
+    <string name="lang_russian">러시아어</string>
+    <string name="lang_italian">이탈리아어</string>
+    <string name="lang_arabic">아랍어</string>
+    <string name="lang_thai">태국어</string>
+    <string name="lang_vietnamese">베트남어</string>
+    <string name="lang_indonesian">인도네시아어</string>
+    <string name="lang_hindi">힌디어</string>
+    <string name="lang_turkish">터키어</string>
+    <string name="lang_dutch">네덜란드어</string>
+    <string name="lang_swedish">스웨덴어</string>
+    <string name="lang_polish">폴란드어</string>
+    <string name="lang_czech">체코어</string>
+    <string name="lang_greek">그리스어</string>
+    <string name="lang_hebrew">히브리어</string>
+
     <string name="error_no_api_key">API 키가 없습니다! 설정에서 입력해주세요.</string>
     <string name="error_network">네트워크 오류. 다시 시도해주세요.</string>
 
